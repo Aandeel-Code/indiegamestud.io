@@ -62,6 +62,9 @@ jobs:
           name: dist
           path: dist
 
+      - name: Add CNAME
+        run: echo "indiegamestud.io" > dist/CNAME
+
       - name: Deploy
         run: |
           git config --global user.name "Aandeel"
