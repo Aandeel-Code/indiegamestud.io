@@ -32,6 +32,10 @@ jobs:
       - name: Build project
         run: npm run build
 
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
       - name: Deploy
         run: |
           git config --global user.name "Anton Putra"
