@@ -177,6 +177,7 @@
 }
 
 .hero-copy h1 {
+  margin-bottom: 1.125rem;
   font-size: clamp(2.9rem, 6.5vw, 5.4rem);
 }
 
@@ -194,6 +195,10 @@
 .section-heading p,
 .release-overlay p {
   color: var(--text-soft);
+}
+
+.hero-text {
+  max-width: 38rem;
 }
 
 .hero-actions {
@@ -363,6 +368,49 @@
   display: block;
   width: 100%;
   object-fit: cover;
+}
+
+@media (min-width: 1920px) {
+  .hero-section {
+    grid-template-columns: minmax(0, 1.15fr) minmax(24rem, 1fr);
+    gap: clamp(3rem, 4vw, 5rem);
+    padding-top: calc(var(--header-height) + clamp(4rem, 6vw, 7rem));
+    padding-bottom: clamp(4rem, 6vw, 7rem);
+  }
+
+  .hero-copy {
+    max-width: 48rem;
+  }
+
+  .hero-copy h1 {
+    margin-bottom: 1.5rem;
+    font-size: clamp(4.4rem, 4.8vw, 6.6rem);
+  }
+
+  .hero-text {
+    max-width: 43rem;
+    font-size: 1.25rem;
+    line-height: 1.7;
+  }
+
+  .hero-actions {
+    gap: 1rem;
+    margin-top: 2.25rem;
+  }
+
+  .button {
+    min-height: 3.5rem;
+    padding: 0 1.5rem;
+    font-size: 1.05rem;
+  }
+
+  .hero-art {
+    min-height: 40rem;
+  }
+
+  .hero-float {
+    max-width: 32rem;
+  }
 }
 
 @keyframes heroFloat {
