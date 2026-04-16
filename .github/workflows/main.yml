@@ -65,6 +65,9 @@ jobs:
       - name: Add CNAME
         run: echo "indiegamestud.io" > dist/CNAME
 
+      - name: Add GOOGLE
+        run: echo "google-site-verification: google53e398d6ca7121e9.html" > dist/google53e398d6ca7121e9.html
+
       - name: Deploy
         run: |
           git config --global user.name "Aandeel"
