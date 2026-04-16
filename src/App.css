@@ -181,6 +181,57 @@
   font-size: clamp(2.9rem, 6.5vw, 5.4rem);
 }
 
+.steam-review-badge {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.15rem;
+  padding: 0.5rem 0.8rem 0.55rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.9rem;
+  background: rgba(12, 27, 34, 0.56);
+  backdrop-filter: blur(8px);
+}
+
+.steam-review-badge-label {
+  color: var(--accent-strong);
+  font-family: var(--tertiary);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.steam-review-badge-summary {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  gap: 0.45rem;
+  text-align: right;
+}
+
+.steam-review-badge-score {
+  color: var(--text-strong);
+  font-size: 0.92rem;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.steam-review-badge-meta {
+  color: var(--text-soft);
+  font-size: 0.82rem;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.steam-review-badge-hero {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: 2;
+  min-width: 10.5rem;
+  max-width: min(14rem, calc(100% - 5.5rem));
+}
+
 .eyebrow {
   margin: 0 0 1rem;
   color: var(--accent);
@@ -431,6 +482,10 @@
   .hero-actions {
     gap: 1rem;
     margin-top: 2.25rem;
+  }
+
+  .steam-review-badge-score {
+    font-size: 1rem;
   }
 
   .button {
@@ -1124,6 +1179,11 @@
     bottom: 1rem;
   }
 
+  .steam-review-badge-hero {
+    top: 1rem;
+    right: 1rem;
+  }
+
   .game-hero-overlay {
     padding: 1.5rem 1.5rem 1rem;
   }
@@ -1170,6 +1230,12 @@
 
   .hero-discord {
     display: none;
+  }
+
+  .steam-review-badge-hero {
+    top: 0.875rem;
+    right: 0.875rem;
+    max-width: calc(100% - 1.75rem);
   }
 
   .mobile-discord {

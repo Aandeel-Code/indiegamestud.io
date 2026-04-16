@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { createPortal } from 'react-dom'
+import SteamReviewBadge from '../components/SteamReviewBadge'
 import { voidloop } from '../data/voidloop'
 
 export default function VoidloopPage() {
@@ -34,6 +35,7 @@ export default function VoidloopPage() {
       <main className="page-section game-page">
         <section className="game-hero">
           <img src={voidloop.heroImage} alt={voidloop.title} />
+          <SteamReviewBadge className="steam-review-badge-hero" />
           {voidloop.links.discord ? (
             <a
               aria-label="Discord"
