@@ -8,11 +8,10 @@
     "fetch-steam-review": "node scripts/fetch-steam-review.mjs",
     "prebuild": "node scripts/fetch-steam-review.mjs",
     "build": "vite build",
-    "add-domain": "echo \"indiegamestud.io\" > build/CNAME",
     "lint": "eslint .",
     "preview": "vite preview",
     "pre-deploy": "npm run build",
-    "deploy": "npm run add-domain && gh-pages -d build"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "gh-pages": "^6.3.0",
