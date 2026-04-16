@@ -1,0 +1,176 @@
+@font-face {
+  font-family: '8bit Wonder';
+  src: url('assets/fonts/8-BIT WONDER.TTF') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Ari W9500';
+  src: url('assets/fonts/ari-w9500-display.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Nokia FC22';
+  src: url('assets/fonts/nokiafc22.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Pixelmix';
+  src: url('assets/fonts/pixelmix.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Pixelmix Bold';
+  src: url('assets/fonts/pixelmix_bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+:root {
+  --bg: #071218;
+  --surface: #0c1b22;
+  --surface-alt: #10242d;
+  --border: rgba(160, 194, 196, 0.18);
+  --border-strong: rgba(210, 233, 230, 0.34);
+  --text: #dbe8e6;
+  --text-strong: #f7fbfa;
+  --text-soft: #a7bfbc;
+  --accent: #b78cff;
+  --accent-strong: #d5bbff;
+  --heading: 'Nokia FC22', 'Segoe UI', sans-serif;
+  --body: 'Nokia FC22', 'Segoe UI', sans-serif;
+  --copy: 'Pixelmix', 'Segoe UI', sans-serif;
+  --tertiary: 'Ari W9500', 'Courier New', monospace;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top, rgba(246, 184, 76, 0.14), transparent 28%),
+    linear-gradient(180deg, #081319 0%, #071218 45%, #09161d 100%);
+  font: 0.9375rem/1.6 var(--body);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 20rem;
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+a,
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+#root {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  isolation: isolate;
+}
+
+#root::before {
+  content: '';
+  position: fixed;
+  inset: -20% 0;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.26;
+  background:
+    radial-gradient(circle at 22% 18%, rgba(129, 72, 255, 0.16), transparent 32%),
+    radial-gradient(circle at 78% 28%, rgba(24, 214, 194, 0.16), transparent 34%),
+    linear-gradient(180deg, rgba(129, 72, 255, 0.07), rgba(24, 214, 194, 0.075), rgba(129, 72, 255, 0.06));
+  animation: siteWashDrift 42s linear infinite;
+  transform: translate3d(0, 0, 0);
+}
+
+#root::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 20;
+  opacity: 0;
+  background:
+    radial-gradient(circle at 50% 12%, rgba(124, 255, 117, 0.42), transparent 36%),
+    radial-gradient(circle at 20% 22%, rgba(60, 255, 80, 0.3), transparent 28%),
+    radial-gradient(circle at 82% 30%, rgba(80, 255, 116, 0.28), transparent 30%),
+    linear-gradient(180deg, rgba(36, 255, 80, 0.36), rgba(8, 255, 80, 0.28));
+  mix-blend-mode: screen;
+  transition: opacity 220ms ease;
+}
+
+body.green-overlay-active #root::after {
+  opacity: 1;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  color: var(--text-strong);
+  font-family: var(--heading);
+  line-height: 0.98;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5.4vw, 4.6rem);
+  letter-spacing: -0.05em;
+}
+
+h2 {
+  font-size: clamp(1.6rem, 3.1vw, 2.5rem);
+  letter-spacing: -0.04em;
+}
+
+h3 {
+  font-size: 1.2rem;
+  letter-spacing: -0.03em;
+  font-family: var(--tertiary);
+  font-weight: 400;
+}
+
+p {
+  margin: 0;
+  font-family: var(--copy);
+}
+
+@keyframes siteWashDrift {
+  0% {
+    transform: translate3d(0, -3%, 0);
+  }
+
+  50% {
+    transform: translate3d(0, 3%, 0);
+  }
+
+  100% {
+    transform: translate3d(0, -3%, 0);
+  }
+}
