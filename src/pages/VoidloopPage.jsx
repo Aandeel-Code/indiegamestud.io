@@ -66,12 +66,21 @@ export default function VoidloopPage() {
             <p>{voidloop.description}</p>
             <div className="hero-actions">
               <a
-                className="button button-primary"
+                className="button button-primary steam-button"
                 href={voidloop.links.steam}
                 target="_blank"
                 rel="noreferrer"
               >
-                View on Steam
+                <span>Play on Steam</span>
+                <span className="steam-button-platforms" aria-hidden="true">
+                  <span className="steam-button-divider" />
+                  <svg className="steam-button-platform steam-button-platform-windows" viewBox="0 0 24 24">
+                    <path d="M2.6 2.6h8.55v8.55H2.6V2.6Zm10.25 0h8.55v8.55h-8.55V2.6ZM2.6 12.85h8.55v8.55H2.6v-8.55Zm10.25 0h8.55v8.55h-8.55v-8.55Z" />
+                  </svg>
+                  <svg className="steam-button-platform steam-button-platform-apple" viewBox="0 0 24 24">
+                    <path d="M16.365 12.673c-.027-2.861 2.336-4.235 2.442-4.299-1.334-1.947-3.405-2.214-4.143-2.244-1.744-.184-3.436 1.045-4.325 1.045-.906 0-2.273-1.027-3.747-.997-1.918.03-3.713 1.14-4.697 2.86-2.029 3.515-.516 8.683 1.43 11.527.974 1.393 2.111 2.95 3.598 2.895 1.455-.061 2-.93 3.759-.93 1.743 0 2.257.93 3.771.895 1.562-.025 2.546-1.398 3.486-2.804 1.126-1.595 1.578-3.169 1.595-3.249-.037-.012-3.135-1.198-3.169-4.699ZM13.524 4.276c.783-.979 1.319-2.307 1.17-3.661-1.133.05-2.55.783-3.365 1.743-.723.845-1.368 2.225-1.201 3.527 1.273.095 2.57-.645 3.396-1.609Z" />
+                  </svg>
+                </span>
               </a>
               <a
                 className="button button-secondary"
