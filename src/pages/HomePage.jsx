@@ -69,7 +69,7 @@ export default function HomePage() {
 
         <div className="hero-copy">
           <p className="eyebrow">Indie Game Studio</p>
-          <h1>Voidloop</h1>
+          <h1>Voidlooper</h1>
           <p className="hero-text">
             Voidloop: Dive into cursed caves, gather
             resources, upgrade your tools, and push deeper in Indie Game Studio's
