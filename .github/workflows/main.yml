@@ -33,5 +33,8 @@ jobs:
         run: npm run build
 
       - name: Deploy
-        uses: actions/deploy-pages@v5
-          
+        run: |
+          git config --global user.name "Anton Putra"
+          git config --global user.email "me@antonputra.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          npm run deploy
