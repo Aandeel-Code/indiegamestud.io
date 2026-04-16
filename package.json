@@ -8,7 +8,7 @@
     "fetch-steam-review": "node scripts/fetch-steam-review.mjs",
     "prebuild": "node scripts/fetch-steam-review.mjs",
     "build": "vite build",
-    "add-domain": "echo \"indiegamestud.io\" > build/CNAME",
+    "add-domain": "echo \"indiegamestud.io\" > /CNAME",
     "lint": "eslint .",
     "preview": "vite preview",
     "pre-deploy": "npm run build",
