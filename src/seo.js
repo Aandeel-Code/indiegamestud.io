@@ -1,9 +1,10 @@
 const siteUrl = 'https://indiegamestud.io'
 const defaultImage = `${siteUrl}/og-image.png`
+const voidloopImage = `${siteUrl}/voidloop-og.png`
 
 export const seoByPath = {
   '/': {
-    title: 'Indie Game Studio',
+    title: 'Home | Indie Game Studio',
     description:
       'A bedroom-born indie studio creating bold, original games. Powered by global talent and shaped by years of Minecraft game development.',
     image: defaultImage,
@@ -13,7 +14,7 @@ export const seoByPath = {
     title: 'Voidloop | Indie Game Studio',
     description:
       'Voidloop is a mining roguelite adventure about cursed cave descents, loot gathering, camp upgrades, and fighting deeper toward home.',
-    image: defaultImage,
+    image: voidloopImage,
     url: `${siteUrl}/voidloop/`,
   },
   '/about': {
