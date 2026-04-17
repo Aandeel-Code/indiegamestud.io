@@ -578,6 +578,10 @@
   max-width: 53.75rem;
 }
 
+.section-heading-full {
+  max-width: none;
+}
+
 .section-heading h1,
 .section-heading h2 {
   margin-bottom: 0.85rem;
@@ -803,6 +807,48 @@
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
+}
+
+.content-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: clamp(1.25rem, 2vw, 1.75rem);
+  border: 1px solid rgba(160, 194, 196, 0.12);
+  border-radius: 1.75rem;
+  background:
+    linear-gradient(180deg, rgba(15, 31, 38, 0.92) 0%, rgba(10, 22, 28, 0.84) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.03),
+    0 1.25rem 2.5rem rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(10px);
+}
+
+.content-panel .section-heading {
+  margin-bottom: 0;
+}
+
+.content-panel .section-heading h2 {
+  font-size: clamp(1.7rem, 3.2vw, 2.35rem);
+}
+
+.content-panel .section-heading p:last-child {
+  max-width: 46rem;
+}
+
+.content-panel .section-heading-full p:last-child {
+  max-width: none;
+}
+
+.content-panel .info-card,
+.content-panel .detail-media {
+  background: rgba(8, 18, 24, 0.72);
+}
+
+.content-panel .release-grid,
+.content-panel .mini-gallery-grid,
+.content-panel .info-grid {
+  margin-top: 0;
 }
 
 .game-hero {
@@ -1174,6 +1220,11 @@
     min-height: 28rem;
   }
 
+  .content-panel {
+    padding: 1.25rem;
+    gap: 1.25rem;
+  }
+
   .hero-discord {
     right: 1rem;
     bottom: 1rem;
@@ -1226,6 +1277,10 @@
 
   .game-hero {
     min-height: 22rem;
+  }
+
+  .content-panel {
+    padding: 1rem;
   }
 
   .hero-discord {

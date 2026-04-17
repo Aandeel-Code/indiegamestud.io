@@ -110,78 +110,92 @@ export default function VoidloopPage() {
           </a>
         ) : null}
 
-        <section className="section-heading section-heading-wide">
-          <p className="eyebrow">Overview</p>
-          <h2>{voidloop.tagline}</h2>
-          <p>
-            Released on {voidloop.releaseDate}, Voidloop is Indie Game Studio&apos;s
-            debut game, built around risky descents, camp-based progression, and a
-            steady push back toward home.
-          </p>
+        <section className="content-panel content-panel-overview">
+          <div className="section-heading section-heading-wide">
+            <p className="eyebrow">Overview</p>
+            <h2>{voidloop.tagline}</h2>
+            <p>
+              Released on {voidloop.releaseDate}, Voidloop is Indie Game Studio&apos;s
+              debut game, built around risky descents, camp-based progression, and a
+              steady push back toward home.
+            </p>
+          </div>
+
+          <div className="info-grid facts-grid">
+            {voidloop.facts.map((fact) => (
+              <article className="info-card" key={fact.label}>
+                <p className="release-tag">{fact.label}</p>
+                <h3>{fact.value}</h3>
+              </article>
+            ))}
+          </div>
         </section>
 
-        <section className="info-grid facts-grid">
-          {voidloop.facts.map((fact) => (
-            <article className="info-card" key={fact.label}>
-              <p className="release-tag">{fact.label}</p>
-              <h3>{fact.value}</h3>
-            </article>
-          ))}
+        <section className="content-panel">
+          <div className="section-heading section-heading-wide">
+            <p className="eyebrow">Features</p>
+            <h2>Designed around repeat runs, stronger loadouts, and deeper cave pressure.</h2>
+          </div>
+
+          <div className="info-grid">
+            {voidloop.features.map((feature) => (
+              <article className="info-card" key={feature}>
+                <p>{feature}</p>
+              </article>
+            ))}
+          </div>
         </section>
 
-        <section className="section-heading section-heading-wide">
-          <p className="eyebrow">Features</p>
-          <h2>Designed around repeat runs, stronger loadouts, and deeper cave pressure.</h2>
+        <section className="content-panel">
+          <div className="section-heading section-heading-wide">
+            <p className="eyebrow">Gallery</p>
+            <h2>Current visuals from camp, caves, and progression systems.</h2>
+          </div>
+
+          <div className="release-grid">
+            {voidloop.featuredScreenshots.map((image, index) => (
+              <button
+                className="release-card static-card screenshot-card"
+                key={image}
+                onClick={() => setActiveScreenshot({ image, index })}
+                type="button"
+              >
+                <img src={image} alt={`${voidloop.title} screenshot ${index + 1}`} />
+              </button>
+            ))}
+          </div>
+
+          <div className="mini-gallery-grid">
+            {voidloop.galleryScreenshots.map((image, index) => (
+              <button
+                className="mini-gallery-card"
+                key={image}
+                onClick={() =>
+                  setActiveScreenshot({
+                    image,
+                    index: voidloop.featuredScreenshots.length + index,
+                  })
+                }
+                type="button"
+              >
+                <img
+                  src={image}
+                  alt={`${voidloop.title} gallery screenshot ${index + 4}`}
+                />
+              </button>
+            ))}
+          </div>
         </section>
 
-        <section className="info-grid">
-          {voidloop.features.map((feature) => (
-            <article className="info-card" key={feature}>
-              <p>{feature}</p>
-            </article>
-          ))}
+        <section className="content-panel">
+          <div className="section-heading section-heading-wide section-heading-full">
+            <p className="eyebrow">About This Game</p>
+            <h2>Built during Jasper Levin&apos;s self-employed placement year and expanded with a small collaborator team.</h2>
+            <p>{voidloop.about}</p>
+          </div>
         </section>
 
-        <section className="section-heading section-heading-wide">
-          <p className="eyebrow">Gallery</p>
-          <h2>Current visuals from camp, caves, and progression systems.</h2>
-        </section>
-
-        <section className="release-grid">
-          {voidloop.featuredScreenshots.map((image, index) => (
-            <button
-              className="release-card static-card screenshot-card"
-              key={image}
-              onClick={() => setActiveScreenshot({ image, index })}
-              type="button"
-            >
-              <img src={image} alt={`${voidloop.title} screenshot ${index + 1}`} />
-            </button>
-          ))}
-        </section>
-
-        <section className="mini-gallery-grid">
-          {voidloop.galleryScreenshots.map((image, index) => (
-            <button
-              className="mini-gallery-card"
-              key={image}
-              onClick={() =>
-                setActiveScreenshot({
-                  image,
-                  index: voidloop.featuredScreenshots.length + index,
-                })
-              }
-              type="button"
-            >
-              <img
-                src={image}
-                alt={`${voidloop.title} gallery screenshot ${index + 4}`}
-              />
-            </button>
-          ))}
-        </section>
-
-        <section className="presskit-section">
+        <section className="content-panel presskit-section">
           <div className="section-heading section-heading-wide">
             <p className="eyebrow">Press Kit</p>
             <h2>Download materials, & request keys</h2>
@@ -223,24 +237,20 @@ export default function VoidloopPage() {
           </div>
         </section>
 
-        <section className="section-heading section-heading-wide">
-          <p className="eyebrow">Credits</p>
-          <h2>The current team behind Voidloop.</h2>
-        </section>
+        <section className="content-panel">
+          <div className="section-heading section-heading-wide">
+            <p className="eyebrow">Credits</p>
+            <h2>The current team behind Voidloop.</h2>
+          </div>
 
-        <section className="info-grid">
-          {voidloop.credits.map((credit) => (
-            <article className="info-card" key={credit.role}>
-              <p className="release-tag">{credit.role}</p>
-              <h3>{credit.name}</h3>
-            </article>
-          ))}
-        </section>
-
-        <section className="section-heading section-heading-wide">
-          <p className="eyebrow">About This Game</p>
-          <h2>Built during Jasper Levin&apos;s self-employed placement year and expanded with a small collaborator team.</h2>
-          <p>{voidloop.about}</p>
+          <div className="info-grid">
+            {voidloop.credits.map((credit) => (
+              <article className="info-card" key={credit.role}>
+                <p className="release-tag">{credit.role}</p>
+                <h3>{credit.name}</h3>
+              </article>
+            ))}
+          </div>
         </section>
       </main>
 
