@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import logoImage from '../assets/image01.png'
+import { getSeoForPath } from '../seo'
 
 function linkClassName({ isActive }) {
   return isActive ? 'nav-link is-active' : 'nav-link'
@@ -9,6 +10,30 @@ function linkClassName({ isActive }) {
 export default function SiteLayout() {
   const [isScrolled, setIsScrolled] = useState(false)
   const location = useLocation()
+
+  useEffect(() => {
+    const seo = getSeoForPath(location.pathname)
+
+    document.title = seo.title
+
+    const updateMeta = (selector, attribute, value) => {
+      const element = document.head.querySelector(selector)
+
+      if (element) {
+        element.setAttribute(attribute, value)
+      }
+    }
+
+    updateMeta('meta[name="title"]', 'content', seo.title)
+    updateMeta('meta[name="description"]', 'content', seo.description)
+    updateMeta('meta[property="og:title"]', 'content', seo.title)
+    updateMeta('meta[property="og:description"]', 'content', seo.description)
+    updateMeta('meta[property="og:image"]', 'content', seo.image)
+    updateMeta('meta[property="og:url"]', 'content', seo.url)
+    updateMeta('meta[name="twitter:title"]', 'content', seo.title)
+    updateMeta('meta[name="twitter:description"]', 'content', seo.description)
+    updateMeta('meta[name="twitter:image"]', 'content', seo.image)
+  }, [location.pathname])
 
   useEffect(() => {
     const handleScroll = () => {
