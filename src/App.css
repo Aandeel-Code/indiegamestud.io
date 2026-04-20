@@ -1158,12 +1158,22 @@
   margin-top: 0.75rem;
 }
 
+.contact-email-link {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.contact-email-link:hover,
+.contact-email-link:focus-visible {
+  color: var(--accent-strong);
+}
+
 .contact-social-link {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   width: 100%;
-  color: var(--text-soft);
+  color: var(--accent);
   text-decoration: none;
   transition:
     color 180ms ease,
@@ -1172,7 +1182,7 @@
 
 .contact-social-link:hover,
 .contact-social-link:focus-visible {
-  color: var(--text-strong);
+  color: var(--accent-strong);
   transform: translateY(-0.0625rem);
 }
 

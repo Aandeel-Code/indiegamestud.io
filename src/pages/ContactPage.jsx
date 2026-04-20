@@ -13,7 +13,11 @@ export default function ContactPage() {
       <section className="info-grid">
         <article className="info-card">
           <h2>Email</h2>
-          <p>jasper@indiegamestud.io</p>
+          <p>
+            <a className="contact-email-link" href="mailto:jasper@indiegamestud.io">
+              jasper@indiegamestud.io
+            </a>
+          </p>
         </article>
         <article className="info-card">
           <h2>Studio socials</h2>
