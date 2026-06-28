@@ -3,6 +3,47 @@ import { createPortal } from 'react-dom'
 import SteamReviewBadge from '../components/SteamReviewBadge'
 import { voidloop } from '../data/voidloop'
 
+function AppleIcon() {
+  return (
+    <svg className="platform-link-icon platform-link-icon-apple" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M16.365 12.673c-.027-2.861 2.336-4.235 2.442-4.299-1.334-1.947-3.405-2.214-4.143-2.244-1.744-.184-3.436 1.045-4.325 1.045-.906 0-2.273-1.027-3.747-.997-1.918.03-3.713 1.14-4.697 2.86-2.029 3.515-.516 8.683 1.43 11.527.974 1.393 2.111 2.95 3.598 2.895 1.455-.061 2-.93 3.759-.93 1.743 0 2.257.93 3.771.895 1.562-.025 2.546-1.398 3.486-2.804 1.126-1.595 1.578-3.169 1.595-3.249-.037-.012-3.135-1.198-3.169-4.699ZM13.524 4.276c.783-.979 1.319-2.307 1.17-3.661-1.133.05-2.55.783-3.365 1.743-.723.845-1.368 2.225-1.201 3.527 1.273.095 2.57-.645 3.396-1.609Z" />
+    </svg>
+  )
+}
+
+function AndroidIcon() {
+  return (
+    <svg className="platform-link-icon platform-link-icon-android" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M7.18 8.4h9.64c.27 0 .49.22.49.49v7.41a1.2 1.2 0 0 1-1.2 1.2h-.58v2.07a.93.93 0 1 1-1.86 0V17.5h-3.34v2.07a.93.93 0 1 1-1.86 0V17.5h-.58a1.2 1.2 0 0 1-1.2-1.2V8.89c0-.27.22-.49.49-.49Zm2.32-3.13a.45.45 0 0 1-.17-.61.45.45 0 0 1 .61-.17l1.15.66a5.24 5.24 0 0 1 1.86-.34c.65 0 1.28.12 1.86.34l1.15-.66a.45.45 0 1 1 .44.78l-1 .57a5.18 5.18 0 0 1 1.96 2.11H7.54A5.18 5.18 0 0 1 9.5 5.84l-1-.57Zm1.3 1.72a.56.56 0 1 0 0-1.12.56.56 0 0 0 0 1.12Zm4.4 0a.56.56 0 1 0 0-1.12.56.56 0 0 0 0 1.12ZM5.1 9.38c.51 0 .93.42.93.93v4.95a.93.93 0 1 1-1.86 0v-4.95c0-.51.42-.93.93-.93Zm13.8 0c.51 0 .93.42.93.93v4.95a.93.93 0 1 1-1.86 0v-4.95c0-.51.42-.93.93-.93Z" />
+    </svg>
+  )
+}
+
+function MobileStoreLinks({ className = '' }) {
+  return (
+    <div className={className}>
+      <a
+        className="button button-primary steam-button store-button"
+        href={voidloop.links.appStore}
+        rel="noreferrer"
+        target="_blank"
+      >
+        <AppleIcon />
+        <span>App Store</span>
+      </a>
+      <a
+        className="button button-primary steam-button store-button"
+        href={voidloop.links.googlePlay}
+        rel="noreferrer"
+        target="_blank"
+      >
+        <AndroidIcon />
+        <span>Google Play</span>
+      </a>
+    </div>
+  )
+}
+
 export default function VoidloopPage() {
   const allScreenshots = [
     ...voidloop.featuredScreenshots,
@@ -84,14 +125,7 @@ export default function VoidloopPage() {
                   </svg>
                 </span>
               </a>
-              <a
-                className="button button-secondary"
-                href={voidloop.links.pressKit}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Open press kit
-              </a>
+              <MobileStoreLinks className="hero-platform-links" />
             </div>
           </div>
         </section>

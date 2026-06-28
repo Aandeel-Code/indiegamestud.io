@@ -15,7 +15,7 @@ export const voidloop = {
   tagline: 'Mining adventure with roguelite elements',
   releaseLabel: 'Out Now',
   releaseDate: 'April 13, 2026',
-  platforms: ['Windows', 'Mac'],
+  platforms: ['Windows', 'Mac', 'iPhone', 'Android'],
   heroImage: heroBackdrop,
   featuredScreenshots: [cutsceneVoid, campMain, campMarket],
   galleryScreenshots: [
@@ -41,7 +41,7 @@ export const voidloop = {
     { label: 'Developer', value: 'Indie Game Studio' },
     { label: 'Based In', value: 'United Kingdom' },
     { label: 'Release Date', value: 'April 13, 2026' },
-    { label: 'Platforms', value: 'Windows & Mac' },
+    { label: 'Platforms', value: 'Windows, Mac, iPhone & Android' },
   ],
   credits: [
     { role: 'Main Creator', name: 'Jasper Levin' },
@@ -53,6 +53,9 @@ export const voidloop = {
     'Voidloop began development in late 2024, originally titled Magical Mining, during Jasper Levin’s self-employed placement year at university under the studio name IndieGameStudio. The game has been built with help from a small group of friends and collaborators, including former Minecraft map makers and university peers.',
   links: {
     steam: 'https://store.steampowered.com/app/3803180/Voidloop/',
+    appStore: 'https://apps.apple.com/us/app/voidloop/id6746944662',
+    googlePlay:
+      'https://play.google.com/store/apps/details?id=com.IndieGameStudio.Voidloop&hl=en',
     pressKit: 'https://drive.google.com/drive/folders/1bpScdtBRKcSQULzFvpSdec0MIaM3vaFo',
     reqKey: 'mailto:request-key@indiegamestud.io',
     discord: 'https://discord.gg/gHrC4XSpuy',
