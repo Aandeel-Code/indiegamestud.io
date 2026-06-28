@@ -23,7 +23,7 @@ function MobileStoreLinks({ className = '' }) {
   return (
     <div className={className}>
       <a
-        className="button button-primary steam-button store-button"
+        className="button button-secondary steam-button store-button"
         href={voidloop.links.appStore}
         rel="noreferrer"
         target="_blank"
@@ -32,7 +32,7 @@ function MobileStoreLinks({ className = '' }) {
         <span>App Store</span>
       </a>
       <a
-        className="button button-primary steam-button store-button"
+        className="button button-secondary steam-button store-button"
         href={voidloop.links.googlePlay}
         rel="noreferrer"
         target="_blank"
