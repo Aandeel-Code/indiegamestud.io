@@ -9,6 +9,10 @@ import ingameCraggyCavern from '../assets/VoidloopGallery/Ingame-Craggy-Cavern.j
 import ingameDesolateDungeon from '../assets/VoidloopGallery/Ingame-Desolate-Dungeon.jpg'
 import ingameMoltenMineshaft from '../assets/VoidloopGallery/Ingame-Molten-Mineshaft.jpg'
 import ingameSlipperySanctuary from '../assets/VoidloopGallery/Ingame-Slippery-Sanctuary.jpg'
+import hatUnlocked from '../assets/hatunlocked.png'
+import hatInGame from '../assets/hatingame.png'
+import hatMenu from '../assets/hatmenu.png'
+import cosmeticsLarger from '../assets/cosmetics-larger.png'
 
 export const voidloop = {
   title: 'Voidloop',
@@ -27,6 +31,13 @@ export const voidloop = {
     ingameMoltenMineshaft,
     ingameSlipperySanctuary,
   ],
+  latestUpdate: {
+    version: 'v1.1',
+    label: 'Hat Update',
+    description:
+      'Suit up for your next descent. v1.1 adds collectible hats, a new way to customise your Void Spirit, and a fresh look for every run.',
+    screenshots: [cosmeticsLarger, hatUnlocked, hatMenu, hatInGame],
+  },
   summary:
     'You play as a lonely Void Spirit who has wandered too far from home. Use your camp as a hub to prepare for each descent into ever-changing caves filled with rare loot and dangerous foes.',
   description:
@@ -38,9 +49,8 @@ export const voidloop = {
     'Mine, fight, and loot 60+ unique items while progressing through 100+ upgrades and 27 powerful skills.',
   ],
   facts: [
-    { label: 'Developer', value: 'Indie Game Studio' },
-    { label: 'Based In', value: 'United Kingdom' },
     { label: 'Release Date', value: 'April 13, 2026' },
+    { label: 'Version', value: '1.0' },
     { label: 'Platforms', value: 'Windows, Mac, iPhone & Android' },
   ],
   credits: [

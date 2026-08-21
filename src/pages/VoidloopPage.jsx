@@ -2,20 +2,19 @@ import { useState } from 'react'
 import { createPortal } from 'react-dom'
 import SteamReviewBadge from '../components/SteamReviewBadge'
 import { voidloop } from '../data/voidloop'
+import androidIcon from '../assets/icons/android.svg'
+import appleIcon from '../assets/icons/apple.svg'
+import discordIcon from '../assets/icons/discord.svg'
 
 function AppleIcon() {
   return (
-    <svg className="platform-link-icon platform-link-icon-apple" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M16.365 12.673c-.027-2.861 2.336-4.235 2.442-4.299-1.334-1.947-3.405-2.214-4.143-2.244-1.744-.184-3.436 1.045-4.325 1.045-.906 0-2.273-1.027-3.747-.997-1.918.03-3.713 1.14-4.697 2.86-2.029 3.515-.516 8.683 1.43 11.527.974 1.393 2.111 2.95 3.598 2.895 1.455-.061 2-.93 3.759-.93 1.743 0 2.257.93 3.771.895 1.562-.025 2.546-1.398 3.486-2.804 1.126-1.595 1.578-3.169 1.595-3.249-.037-.012-3.135-1.198-3.169-4.699ZM13.524 4.276c.783-.979 1.319-2.307 1.17-3.661-1.133.05-2.55.783-3.365 1.743-.723.845-1.368 2.225-1.201 3.527 1.273.095 2.57-.645 3.396-1.609Z" />
-    </svg>
+    <img className="platform-link-icon platform-link-icon-apple" src={appleIcon} alt="" />
   )
 }
 
 function AndroidIcon() {
   return (
-    <svg className="platform-link-icon platform-link-icon-android" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M7.18 8.4h9.64c.27 0 .49.22.49.49v7.41a1.2 1.2 0 0 1-1.2 1.2h-.58v2.07a.93.93 0 1 1-1.86 0V17.5h-3.34v2.07a.93.93 0 1 1-1.86 0V17.5h-.58a1.2 1.2 0 0 1-1.2-1.2V8.89c0-.27.22-.49.49-.49Zm2.32-3.13a.45.45 0 0 1-.17-.61.45.45 0 0 1 .61-.17l1.15.66a5.24 5.24 0 0 1 1.86-.34c.65 0 1.28.12 1.86.34l1.15-.66a.45.45 0 1 1 .44.78l-1 .57a5.18 5.18 0 0 1 1.96 2.11H7.54A5.18 5.18 0 0 1 9.5 5.84l-1-.57Zm1.3 1.72a.56.56 0 1 0 0-1.12.56.56 0 0 0 0 1.12Zm4.4 0a.56.56 0 1 0 0-1.12.56.56 0 0 0 0 1.12ZM5.1 9.38c.51 0 .93.42.93.93v4.95a.93.93 0 1 1-1.86 0v-4.95c0-.51.42-.93.93-.93Zm13.8 0c.51 0 .93.42.93.93v4.95a.93.93 0 1 1-1.86 0v-4.95c0-.51.42-.93.93-.93Z" />
-    </svg>
+    <img className="platform-link-icon platform-link-icon-android" src={androidIcon} alt="" />
   )
 }
 
@@ -48,6 +47,7 @@ export default function VoidloopPage() {
   const allScreenshots = [
     ...voidloop.featuredScreenshots,
     ...voidloop.galleryScreenshots,
+    ...voidloop.latestUpdate.screenshots,
   ]
   const [activeScreenshot, setActiveScreenshot] = useState(null)
 
@@ -85,6 +85,7 @@ export default function VoidloopPage() {
               rel="noreferrer"
               target="_blank"
             >
+              <img className="pixel-discord-icon" src={discordIcon} alt="" />
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M20.317 4.369a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037 13.714 13.714 0 0 0-.607 1.233 18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.233.077.077 0 0 0-.079-.037 19.736 19.736 0 0 0-4.885 1.515.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.056 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.027 13.83 13.83 0 0 0 1.226-1.994.076.076 0 0 0-.041-.105 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.927 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.009c.12.099.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.04.106 15.885 15.885 0 0 0 1.225 1.993.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.055c.5-5.177-.838-9.674-3.548-13.66a.061.061 0 0 0-.031-.03ZM8.02 15.331c-1.183 0-2.157-1.085-2.157-2.418 0-1.333.955-2.418 2.157-2.418 1.21 0 2.175 1.095 2.157 2.418 0 1.333-.955 2.418-2.157 2.418Zm7.975 0c-1.183 0-2.157-1.085-2.157-2.418 0-1.333.955-2.418 2.157-2.418 1.21 0 2.175 1.095 2.157 2.418 0 1.333-.946 2.418-2.157 2.418Z" />
               </svg>
@@ -97,6 +98,7 @@ export default function VoidloopPage() {
               title="Add voidloop.links.discord in src/data/voidloop.js"
               type="button"
             >
+              <img className="pixel-discord-icon" src={discordIcon} alt="" />
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M20.317 4.369a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037 13.714 13.714 0 0 0-.607 1.233 18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.233.077.077 0 0 0-.079-.037 19.736 19.736 0 0 0-4.885 1.515.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.056 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.027 13.83 13.83 0 0 0 1.226-1.994.076.076 0 0 0-.041-.105 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.927 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.009c.12.099.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.04.106 15.885 15.885 0 0 0 1.225 1.993.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.055c.5-5.177-.838-9.674-3.548-13.66a.061.061 0 0 0-.031-.03ZM8.02 15.331c-1.183 0-2.157-1.085-2.157-2.418 0-1.333.955-2.418 2.157-2.418 1.21 0 2.175 1.095 2.157 2.418 0 1.333-.955 2.418-2.157 2.418Zm7.975 0c-1.183 0-2.157-1.085-2.157-2.418 0-1.333.955-2.418 2.157-2.418 1.21 0 2.175 1.095 2.157 2.418 0 1.333-.946 2.418-2.157 2.418Z" />
               </svg>
@@ -117,12 +119,10 @@ export default function VoidloopPage() {
                 <span>Play on Steam</span>
                 <span className="steam-button-platforms" aria-hidden="true">
                   <span className="steam-button-divider" />
-                  <svg className="steam-button-platform steam-button-platform-windows" viewBox="0 0 24 24">
+                  <svg className="steam-button-platform steam-button-platform-windows" viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M2.6 2.6h8.55v8.55H2.6V2.6Zm10.25 0h8.55v8.55h-8.55V2.6ZM2.6 12.85h8.55v8.55H2.6v-8.55Zm10.25 0h8.55v8.55h-8.55v-8.55Z" />
                   </svg>
-                  <svg className="steam-button-platform steam-button-platform-apple" viewBox="0 0 24 24">
-                    <path d="M16.365 12.673c-.027-2.861 2.336-4.235 2.442-4.299-1.334-1.947-3.405-2.214-4.143-2.244-1.744-.184-3.436 1.045-4.325 1.045-.906 0-2.273-1.027-3.747-.997-1.918.03-3.713 1.14-4.697 2.86-2.029 3.515-.516 8.683 1.43 11.527.974 1.393 2.111 2.95 3.598 2.895 1.455-.061 2-.93 3.759-.93 1.743 0 2.257.93 3.771.895 1.562-.025 2.546-1.398 3.486-2.804 1.126-1.595 1.578-3.169 1.595-3.249-.037-.012-3.135-1.198-3.169-4.699ZM13.524 4.276c.783-.979 1.319-2.307 1.17-3.661-1.133.05-2.55.783-3.365 1.743-.723.845-1.368 2.225-1.201 3.527 1.273.095 2.57-.645 3.396-1.609Z" />
-                  </svg>
+                  <img className="steam-button-platform steam-button-platform-apple" src={appleIcon} alt="" />
                 </span>
               </a>
               <MobileStoreLinks className="hero-platform-links" />
@@ -137,12 +137,38 @@ export default function VoidloopPage() {
             rel="noreferrer"
             target="_blank"
           >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M20.317 4.369a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037 13.714 13.714 0 0 0-.607 1.233 18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.233.077.077 0 0 0-.079-.037 19.736 19.736 0 0 0-4.885 1.515.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.056 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.027 13.83 13.83 0 0 0 1.226-1.994.076.076 0 0 0-.041-.105 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.927 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.009c.12.099.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.04.106 15.885 15.885 0 0 0 1.225 1.993.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.055c.5-5.177-.838-9.674-3.548-13.66a.061.061 0 0 0-.031-.03ZM8.02 15.331c-1.183 0-2.157-1.085-2.157-2.418 0-1.333.955-2.418 2.157-2.418 1.21 0 2.175 1.095 2.157 2.418 0 1.333-.955 2.418-2.157 2.418Zm7.975 0c-1.183 0-2.157-1.085-2.157-2.418 0-1.333.955-2.418 2.157-2.418 1.21 0 2.175 1.095 2.157 2.418 0 1.333-.946 2.418-2.157 2.418Z" />
-            </svg>
+            <img className="pixel-discord-icon" src={discordIcon} alt="" />
             <span>Join Discord</span>
           </a>
         ) : null}
+
+        <section
+          className="content-panel update-panel"
+          id="hat-update"
+          style={{ '--update-background': `url(${voidloop.latestUpdate.screenshots[0]})` }}
+        >
+          <div className="update-copy">
+            <p className="eyebrow">Latest update · {voidloop.latestUpdate.version}</p>
+            <h2>{voidloop.latestUpdate.label}</h2>
+            <p>{voidloop.latestUpdate.description}</p>
+            <div className="update-note">
+              <span className="update-note-dot" aria-hidden="true" />
+              <span>Available now on all platforms</span>
+            </div>
+          </div>
+          <div className="update-gallery">
+            {voidloop.latestUpdate.screenshots.map((image, index) => (
+              <button
+                className={`update-shot update-shot-${index + 1}`}
+                key={image}
+                onClick={() => setActiveScreenshot({ image, index: allScreenshots.indexOf(image) })}
+                type="button"
+              >
+                <img src={image} alt={`${voidloop.latestUpdate.label} screenshot ${index + 1}`} />
+              </button>
+            ))}
+          </div>
+        </section>
 
         <section className="content-panel content-panel-overview">
           <div className="section-heading section-heading-wide">

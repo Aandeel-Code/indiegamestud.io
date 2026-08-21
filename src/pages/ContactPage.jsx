@@ -1,4 +1,9 @@
 import { voidloop } from '../data/voidloop'
+import blueskyIcon from '../assets/icons/bluesky.svg'
+import discordIcon from '../assets/icons/discord.svg'
+import instagramIcon from '../assets/icons/instagram.svg'
+import linkedinIcon from '../assets/icons/linkedin.svg'
+import xIcon from '../assets/icons/x.svg'
 
 export default function ContactPage() {
   return (
@@ -30,9 +35,7 @@ export default function ContactPage() {
               target="_blank"
               rel="noreferrer"
             >
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M17.64 3H20.7l-6.68 7.63L22 21h-6.27l-4.9-6.4L5.23 21H2.16l7.14-8.16L2 3h6.43l4.43 5.85L17.64 3Zm-1.1 16.12h1.7L7.5 4.78H5.68l10.86 14.34Z" />
-              </svg>
+              <img src={xIcon} alt="" />
               <span>X</span>
             </a>
             <a
@@ -41,9 +44,7 @@ export default function ContactPage() {
               target="_blank"
               rel="noreferrer"
             >
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12 11.36c1.67-3.21 6.22-8.18 8.63-9.88 1.73-1.22 2.37-1.01 2.37-.21 0 1.61-2.1 6.68-3.09 8.58-.68 1.31-1.5 2.58-2.78 3.34 1.16-.19 2.47-.03 3.3.68 1.47 1.25 1.01 3.37-.38 4.51-1.56 1.28-4.2 1.56-6.2.77-1.14-.45-1.93-1.3-2.55-2.34-.62 1.04-1.41 1.89-2.55 2.34-2 .79-4.64.51-6.2-.77-1.39-1.14-1.85-3.26-.38-4.51.83-.71 2.14-.87 3.3-.68-1.28-.76-2.1-2.03-2.78-3.34C3.1 7.86 1 2.79 1 1.18c0-.8.64-1.01 2.37.21C5.78 3.18 10.33 8.15 12 11.36Z" />
-              </svg>
+              <img src={blueskyIcon} alt="" />
               <span>Bluesky</span>
             </a>
             <a
@@ -52,9 +53,7 @@ export default function ContactPage() {
               target="_blank"
               rel="noreferrer"
             >
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M7.25 2h9.5A5.25 5.25 0 0 1 22 7.25v9.5A5.25 5.25 0 0 1 16.75 22h-9.5A5.25 5.25 0 0 1 2 16.75v-9.5A5.25 5.25 0 0 1 7.25 2Zm0 1.8A3.45 3.45 0 0 0 3.8 7.25v9.5a3.45 3.45 0 0 0 3.45 3.45h9.5a3.45 3.45 0 0 0 3.45-3.45v-9.5a3.45 3.45 0 0 0-3.45-3.45h-9.5Zm9.9 1.35a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.8A3.2 3.2 0 1 0 12 15.2 3.2 3.2 0 0 0 12 8.8Z" />
-              </svg>
+              <img src={instagramIcon} alt="" />
               <span>Instagram</span>
             </a>
             <a
@@ -63,9 +62,7 @@ export default function ContactPage() {
               target="_blank"
               rel="noreferrer"
             >
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M4.98 3.5a1.98 1.98 0 1 1 0 3.96 1.98 1.98 0 0 1 0-3.96ZM3.3 8.85h3.36V20.7H3.3V8.85Zm5.48 0h3.22v1.62h.05c.45-.85 1.54-1.95 3.16-1.95 3.38 0 4 2.22 4 5.1v7.08h-3.36v-6.27c0-1.5-.03-3.43-2.09-3.43-2.1 0-2.42 1.64-2.42 3.32v6.38H8.78V8.85Z" />
-              </svg>
+              <img src={linkedinIcon} alt="" />
               <span>LinkedIn</span>
             </a>
           </div>
@@ -79,9 +76,7 @@ export default function ContactPage() {
               target="_blank"
               rel="noreferrer"
             >
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M20.317 4.369a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037 13.714 13.714 0 0 0-.607 1.233 18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.233.077.077 0 0 0-.079-.037 19.736 19.736 0 0 0-4.885 1.515.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.056 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.027 13.83 13.83 0 0 0 1.226-1.994.076.076 0 0 0-.041-.105 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.927 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.009c.12.099.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.04.106 15.885 15.885 0 0 0 1.225 1.993.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.055c.5-5.177-.838-9.674-3.548-13.66a.061.061 0 0 0-.031-.03ZM8.02 15.331c-1.183 0-2.157-1.085-2.157-2.418 0-1.333.955-2.418 2.157-2.418 1.21 0 2.175 1.095 2.157 2.418 0 1.333-.955 2.418-2.157 2.418Zm7.975 0c-1.183 0-2.157-1.085-2.157-2.418 0-1.333.955-2.418 2.157-2.418 1.21 0 2.175 1.095 2.157 2.418 0 1.333-.946 2.418-2.157 2.418Z" />
-              </svg>
+              <img src={discordIcon} alt="" />
               <span>Voidloop Discord</span>
             </a>
           </div>
