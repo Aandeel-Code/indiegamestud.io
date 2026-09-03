@@ -50,7 +50,8 @@ export const voidloop = {
   ],
   facts: [
     { label: 'Release Date', value: 'April 13, 2026' },
-    { label: 'Version', value: '1.0' },
+    { label: 'Last Updated', value: 'September 3, 2026' },
+    { label: 'Version', value: 'v1.1' },
     { label: 'Platforms', value: 'Windows, Mac, iPhone & Android' },
   ],
   credits: [

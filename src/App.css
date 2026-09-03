@@ -549,11 +549,6 @@
   padding: clamp(3rem, 5vw, 4.25rem) clamp(1.25rem, 4vw, 3rem) 5rem;
 }
 
-.home-update-feature,
-.update-panel {
-  display: none;
-}
-
 .pixel-divider {
   width: 100%;
   height: 1px;
@@ -896,7 +891,7 @@
 }
 
 .facts-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .facts-grid .info-card h3 {
@@ -1797,9 +1792,4 @@
     width: 2.625rem;
     height: 2.625rem;
   }
-}
-
-.home-update-feature,
-.update-panel {
-  display: none !important;
 }
