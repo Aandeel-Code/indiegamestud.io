@@ -1,3 +1,5 @@
+import quizGameImage from './assets/ANormalQuizGameGallery/PromotionalArt/Final_1080p__Compressed_.png'
+
 const siteUrl = 'https://indiegamestud.io'
 const defaultImage = `${siteUrl}/og-image.png`
 const voidloopImage = `${siteUrl}/voidloop-og.png`
@@ -16,6 +18,13 @@ export const seoByPath = {
       'Voidloop is a mining roguelite adventure about cursed cave descents, loot gathering, camp upgrades, and fighting deeper toward home.',
     image: voidloopImage,
     url: `${siteUrl}/voidloop/`,
+  },
+  '/a-normal-quiz-game': {
+    title: 'A Normal Quiz Game | Indie Game Studio',
+    description:
+      'A Normal Quiz Game is a colourful quiz show full of tricky questions, unexpected gimmicks, and chaotic consequences. Coming Q1 2027 for Windows and Mac.',
+    image: quizGameImage,
+    url: `${siteUrl}/a-normal-quiz-game/`,
   },
   '/about': {
     title: 'About | Indie Game Studio',

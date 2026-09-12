@@ -1,371 +1,394 @@
-import { useState } from 'react'
-import { createPortal } from 'react-dom'
+import {useState} from 'react'
+import {createPortal} from 'react-dom'
 import SteamReviewBadge from '../components/SteamReviewBadge'
-import { voidloop } from '../data/voidloop'
+import {voidloop} from '../data/voidloop'
 import androidIcon from '../assets/icons/android.svg'
 import appleIcon from '../assets/icons/apple.svg'
 import discordIcon from '../assets/icons/discord.svg'
 
 function AppleIcon() {
-  return (
-    <img className="platform-link-icon platform-link-icon-apple" src={appleIcon} alt="" />
-  )
+    return (
+        <img className="platform-link-icon platform-link-icon-apple" src={appleIcon} alt=""/>
+    )
 }
 
 function AndroidIcon() {
-  return (
-    <img className="platform-link-icon platform-link-icon-android" src={androidIcon} alt="" />
-  )
+    return (
+        <img className="platform-link-icon platform-link-icon-android" src={androidIcon} alt=""/>
+    )
 }
 
-function MobileStoreLinks({ className = '' }) {
-  return (
-    <div className={className}>
-      <a
-        className="button button-secondary steam-button store-button"
-        href={voidloop.links.appStore}
-        rel="noreferrer"
-        target="_blank"
-      >
-        <AppleIcon />
-        <span>App Store</span>
-      </a>
-      <a
-        className="button button-secondary steam-button store-button"
-        href={voidloop.links.googlePlay}
-        rel="noreferrer"
-        target="_blank"
-      >
-        <AndroidIcon />
-        <span>Google Play</span>
-      </a>
-    </div>
-  )
+function MobileStoreLinks({className = ''}) {
+    return (
+        <div className={className}>
+            <a
+                className="button button-secondary steam-button store-button"
+                href={voidloop.links.appStore}
+                rel="noreferrer"
+                target="_blank"
+            >
+                <AppleIcon/>
+                <span>App Store</span>
+            </a>
+            <a
+                className="button button-secondary steam-button store-button"
+                href={voidloop.links.googlePlay}
+                rel="noreferrer"
+                target="_blank"
+            >
+                <AndroidIcon/>
+                <span>Google Play</span>
+            </a>
+        </div>
+    )
 }
 
 export default function VoidloopPage() {
-  const allScreenshots = [
-    ...voidloop.featuredScreenshots,
-    ...voidloop.galleryScreenshots,
-    ...voidloop.latestUpdate.screenshots,
-  ]
-  const [activeScreenshot, setActiveScreenshot] = useState(null)
+    const allScreenshots = [
+        ...voidloop.featuredScreenshots,
+        ...voidloop.galleryScreenshots,
+        ...voidloop.latestUpdate.screenshots,
+    ]
+    const [activeScreenshot, setActiveScreenshot] = useState(null)
 
-  const showPreviousScreenshot = () => {
-    if (!activeScreenshot) {
-      return
+    const showPreviousScreenshot = () => {
+        if (!activeScreenshot) {
+            return
+        }
+
+        const nextIndex =
+            (activeScreenshot.index - 1 + allScreenshots.length) % allScreenshots.length
+
+        setActiveScreenshot({image: allScreenshots[nextIndex], index: nextIndex})
     }
 
-    const nextIndex =
-      (activeScreenshot.index - 1 + allScreenshots.length) % allScreenshots.length
+    const showNextScreenshot = () => {
+        if (!activeScreenshot) {
+            return
+        }
 
-    setActiveScreenshot({ image: allScreenshots[nextIndex], index: nextIndex })
-  }
-
-  const showNextScreenshot = () => {
-    if (!activeScreenshot) {
-      return
+        const nextIndex = (activeScreenshot.index + 1) % allScreenshots.length
+        setActiveScreenshot({image: allScreenshots[nextIndex], index: nextIndex})
     }
 
-    const nextIndex = (activeScreenshot.index + 1) % allScreenshots.length
-    setActiveScreenshot({ image: allScreenshots[nextIndex], index: nextIndex })
-  }
-
-  return (
-    <>
-      <main className="page-section game-page">
-        <section className="game-hero">
-          <img src={voidloop.heroImage} alt={voidloop.title} />
-          <SteamReviewBadge className="steam-review-badge-hero" />
-          {voidloop.links.discord ? (
-            <a
-              aria-label="Discord"
-              className="hero-discord"
-              href={voidloop.links.discord}
-              rel="noreferrer"
-              target="_blank"
-            >
-              <img className="pixel-discord-icon" src={discordIcon} alt="" />
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M20.317 4.369a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037 13.714 13.714 0 0 0-.607 1.233 18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.233.077.077 0 0 0-.079-.037 19.736 19.736 0 0 0-4.885 1.515.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.056 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.027 13.83 13.83 0 0 0 1.226-1.994.076.076 0 0 0-.041-.105 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.927 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.009c.12.099.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.04.106 15.885 15.885 0 0 0 1.225 1.993.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.055c.5-5.177-.838-9.674-3.548-13.66a.061.061 0 0 0-.031-.03ZM8.02 15.331c-1.183 0-2.157-1.085-2.157-2.418 0-1.333.955-2.418 2.157-2.418 1.21 0 2.175 1.095 2.157 2.418 0 1.333-.955 2.418-2.157 2.418Zm7.975 0c-1.183 0-2.157-1.085-2.157-2.418 0-1.333.955-2.418 2.157-2.418 1.21 0 2.175 1.095 2.157 2.418 0 1.333-.946 2.418-2.157 2.418Z" />
-              </svg>
-              <span>Discord</span>
-            </a>
-          ) : (
-            <button
-              aria-label="Discord link placeholder"
-              className="hero-discord is-placeholder"
-              title="Add voidloop.links.discord in src/data/voidloop.js"
-              type="button"
-            >
-              <img className="pixel-discord-icon" src={discordIcon} alt="" />
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M20.317 4.369a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037 13.714 13.714 0 0 0-.607 1.233 18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.233.077.077 0 0 0-.079-.037 19.736 19.736 0 0 0-4.885 1.515.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.056 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.027 13.83 13.83 0 0 0 1.226-1.994.076.076 0 0 0-.041-.105 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.927 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.009c.12.099.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.04.106 15.885 15.885 0 0 0 1.225 1.993.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.055c.5-5.177-.838-9.674-3.548-13.66a.061.061 0 0 0-.031-.03ZM8.02 15.331c-1.183 0-2.157-1.085-2.157-2.418 0-1.333.955-2.418 2.157-2.418 1.21 0 2.175 1.095 2.157 2.418 0 1.333-.955 2.418-2.157 2.418Zm7.975 0c-1.183 0-2.157-1.085-2.157-2.418 0-1.333.955-2.418 2.157-2.418 1.21 0 2.175 1.095 2.157 2.418 0 1.333-.946 2.418-2.157 2.418Z" />
-              </svg>
-              <span>Discord</span>
-            </button>
-          )}
-          <div className="game-hero-overlay">
-            <p className="release-tag">{voidloop.releaseLabel}</p>
-            <h1>{voidloop.title}</h1>
-            <p>{voidloop.description}</p>
-            <div className="hero-actions">
-              <a
-                className="button button-primary steam-button"
-                href={voidloop.links.steam}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <span>Play on Steam</span>
-                <span className="steam-button-platforms" aria-hidden="true">
-                  <span className="steam-button-divider" />
-                  <svg className="steam-button-platform steam-button-platform-windows" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M2.6 2.6h8.55v8.55H2.6V2.6Zm10.25 0h8.55v8.55h-8.55V2.6ZM2.6 12.85h8.55v8.55H2.6v-8.55Zm10.25 0h8.55v8.55h-8.55v-8.55Z" />
+    return (
+        <>
+            <main className="game-page voidloop-page">
+                <section className="game-hero">
+                    <img src={voidloop.heroImage} alt={voidloop.title} decoding="async" fetchPriority="high"/>
+                    <SteamReviewBadge className="steam-review-badge-hero"/>
+                    {voidloop.links.discord ? (
+                        <a
+                            aria-label="Discord"
+                            className="hero-discord"
+                            href={voidloop.links.discord}
+                            rel="noreferrer"
+                            target="_blank"
+                        >
+                            <img className="pixel-discord-icon" src={discordIcon} alt=""/>
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path
+                                    d="M20.317 4.369a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037 13.714 13.714 0 0 0-.607 1.233 18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.233.077.077 0 0 0-.079-.037 19.736 19.736 0 0 0-4.885 1.515.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.056 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.027 13.83 13.83 0 0 0 1.226-1.994.076.076 0 0 0-.041-.105 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.927 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.009c.12.099.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.04.106 15.885 15.885 0 0 0 1.225 1.993.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.055c.5-5.177-.838-9.674-3.548-13.66a.061.061 0 0 0-.031-.03ZM8.02 15.331c-1.183 0-2.157-1.085-2.157-2.418 0-1.333.955-2.418 2.157-2.418 1.21 0 2.175 1.095 2.157 2.418 0 1.333-.955 2.418-2.157 2.418Zm7.975 0c-1.183 0-2.157-1.085-2.157-2.418 0-1.333.955-2.418 2.157-2.418 1.21 0 2.175 1.095 2.157 2.418 0 1.333-.946 2.418-2.157 2.418Z"/>
+                            </svg>
+                            <span>Discord</span>
+                        </a>
+                    ) : (
+                        <button
+                            aria-label="Discord link placeholder"
+                            className="hero-discord is-placeholder"
+                            title="Add voidloop.links.discord in src/data/voidloop.js"
+                            type="button"
+                        >
+                            <img className="pixel-discord-icon" src={discordIcon} alt=""/>
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path
+                                    d="M20.317 4.369a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037 13.714 13.714 0 0 0-.607 1.233 18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.233.077.077 0 0 0-.079-.037 19.736 19.736 0 0 0-4.885 1.515.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.056 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.027 13.83 13.83 0 0 0 1.226-1.994.076.076 0 0 0-.041-.105 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.927 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.009c.12.099.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.04.106 15.885 15.885 0 0 0 1.225 1.993.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.055c.5-5.177-.838-9.674-3.548-13.66a.061.061 0 0 0-.031-.03ZM8.02 15.331c-1.183 0-2.157-1.085-2.157-2.418 0-1.333.955-2.418 2.157-2.418 1.21 0 2.175 1.095 2.157 2.418 0 1.333-.955 2.418-2.157 2.418Zm7.975 0c-1.183 0-2.157-1.085-2.157-2.418 0-1.333.955-2.418 2.157-2.418 1.21 0 2.175 1.095 2.157 2.418 0 1.333-.946 2.418-2.157 2.418Z"/>
+                            </svg>
+                            <span>Discord</span>
+                        </button>
+                    )}
+                    <div className="game-hero-overlay">
+                        <p className="release-tag">{voidloop.releaseLabel}</p>
+                        <h1 className="hero-logo-breathe">{voidloop.title}</h1>
+                        <p>{voidloop.description}</p>
+                        <div className="hero-actions">
+                            <a
+                                className="button button-primary steam-button"
+                                href={voidloop.links.steam}
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                <span>Play on Steam</span>
+                                <span className="steam-button-platforms" aria-hidden="true">
+                  <span className="steam-button-divider"/>
+                  <svg className="steam-button-platform steam-button-platform-windows" viewBox="0 0 24 24"
+                       aria-hidden="true">
+                    <path
+                        d="M2.6 2.6h8.55v8.55H2.6V2.6Zm10.25 0h8.55v8.55h-8.55V2.6ZM2.6 12.85h8.55v8.55H2.6v-8.55Zm10.25 0h8.55v8.55h-8.55v-8.55Z"/>
                   </svg>
-                  <img className="steam-button-platform steam-button-platform-apple" src={appleIcon} alt="" />
+                  <img className="steam-button-platform steam-button-platform-apple" src={appleIcon} alt=""/>
                 </span>
-              </a>
-              <MobileStoreLinks className="hero-platform-links" />
-            </div>
-          </div>
-        </section>
+                            </a>
+                            <MobileStoreLinks className="hero-platform-links"/>
+                        </div>
+                    </div>
+                    <a
+                        aria-label="See more about Voidloop"
+                        className="voidloop-hero-see-more"
+                        href="#hat-update"
+                    >
+                        See more <span aria-hidden="true">↓</span>
+                    </a>
+                </section>
 
-        {voidloop.links.discord ? (
-          <a
-            className="mobile-discord button button-secondary"
-            href={voidloop.links.discord}
-            rel="noreferrer"
-            target="_blank"
-          >
-            <img className="pixel-discord-icon" src={discordIcon} alt="" />
-            <span>Join Discord</span>
-          </a>
-        ) : null}
+                {voidloop.links.discord ? (
+                    <a
+                        className="mobile-discord button button-secondary"
+                        href={voidloop.links.discord}
+                        rel="noreferrer"
+                        target="_blank"
+                    >
+                        <img className="pixel-discord-icon" src={discordIcon} alt=""/>
+                        <span>Join Discord</span>
+                    </a>
+                ) : null}
 
-        <section
-          className="content-panel update-panel"
-          id="hat-update"
-          style={{ '--update-background': `url(${voidloop.latestUpdate.screenshots[0]})` }}
-        >
-          <div className="update-copy">
-            <p className="eyebrow">Latest update · {voidloop.latestUpdate.version}</p>
-            <h2>{voidloop.latestUpdate.label}</h2>
-            <p>{voidloop.latestUpdate.description}</p>
-            <div className="update-note">
-              <span className="update-note-dot" aria-hidden="true" />
-              <span>Available now on all platforms</span>
-            </div>
-          </div>
-          <div className="update-gallery">
-            {voidloop.latestUpdate.screenshots.map((image, index) => (
-              <button
-                className={`update-shot update-shot-${index + 1}`}
-                key={image}
-                onClick={() => setActiveScreenshot({ image, index: allScreenshots.indexOf(image) })}
-                type="button"
-              >
-                <img src={image} alt={`${voidloop.latestUpdate.label} screenshot ${index + 1}`} />
-              </button>
-            ))}
-          </div>
-        </section>
-
-        <section className="content-panel content-panel-overview">
-          <div className="section-heading section-heading-wide">
-            <p className="eyebrow">Overview</p>
-            <h2>{voidloop.tagline}</h2>
-            <p>
-              Released on {voidloop.releaseDate}, Voidloop is Indie Game Studio&apos;s
-              debut game, built around risky descents, camp-based progression, and a
-              steady push back toward home.
-            </p>
-          </div>
-
-          <div className="info-grid facts-grid">
-            {voidloop.facts.map((fact) => (
-              <article className="info-card" key={fact.label}>
-                <p className="release-tag">{fact.label}</p>
-                <h3>{fact.value}</h3>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="content-panel">
-          <div className="section-heading section-heading-wide">
-            <p className="eyebrow">Features</p>
-            <h2>Designed around repeat runs, stronger loadouts, and deeper cave pressure.</h2>
-          </div>
-
-          <div className="info-grid">
-            {voidloop.features.map((feature) => (
-              <article className="info-card" key={feature}>
-                <p>{feature}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="content-panel">
-          <div className="section-heading section-heading-wide">
-            <p className="eyebrow">Gallery</p>
-            <h2>Current visuals from camp, caves, and progression systems.</h2>
-          </div>
-
-          <div className="release-grid">
-            {voidloop.featuredScreenshots.map((image, index) => (
-              <button
-                className="release-card static-card screenshot-card"
-                key={image}
-                onClick={() => setActiveScreenshot({ image, index })}
-                type="button"
-              >
-                <img src={image} alt={`${voidloop.title} screenshot ${index + 1}`} />
-              </button>
-            ))}
-          </div>
-
-          <div className="mini-gallery-grid">
-            {voidloop.galleryScreenshots.map((image, index) => (
-              <button
-                className="mini-gallery-card"
-                key={image}
-                onClick={() =>
-                  setActiveScreenshot({
-                    image,
-                    index: voidloop.featuredScreenshots.length + index,
-                  })
-                }
-                type="button"
-              >
-                <img
-                  src={image}
-                  alt={`${voidloop.title} gallery screenshot ${index + 4}`}
-                />
-              </button>
-            ))}
-          </div>
-        </section>
-
-        <section className="content-panel">
-          <div className="section-heading section-heading-wide section-heading-full">
-            <p className="eyebrow">About This Game</p>
-            <h2>Built during Jasper Levin&apos;s self-employed placement year and expanded with a small collaborator team.</h2>
-            <p>{voidloop.about}</p>
-          </div>
-        </section>
-
-        <section className="content-panel presskit-section">
-          <div className="section-heading section-heading-wide">
-            <p className="eyebrow">Press Kit</p>
-            <h2>Download materials, & request keys</h2>
-          </div>
-
-          <div className="info-grid">
-            <article className="info-card presskit-card">
-              <h3>Download Press kit</h3>
-              <p>
-                Access the live press kit for logos, screenshots, videos and the trailer.
-              </p>
-              <div className="hero-actions">
-                <a
-                  className="button button-primary"
-                  href={voidloop.links.pressKit}
-                  target="_blank"
-                  rel="noreferrer"
+                <section
+                    className="content-panel update-panel"
+                    id="hat-update"
+                    style={{'--update-background': `url(${voidloop.latestUpdate.screenshots[0]})`}}
                 >
-                  Open press kit
-                </a>
-              </div>
-            </article>
-            <article className="info-card presskit-card">
-              <h3>Steam key requests</h3>
-              <p>
-                Request coverage access for Voidloop.
-              </p>
-              <div className="hero-actions">
-                <a
-                  className="button button-secondary"
-                  href={voidloop.links.reqKey}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Request Key
-                </a>
-              </div>
-            </article>
-          </div>
-        </section>
+                    <div className="update-copy">
+                        <p className="eyebrow">Latest update · {voidloop.latestUpdate.version}</p>
+                        <h2>{voidloop.latestUpdate.label}</h2>
+                        <p>{voidloop.latestUpdate.description}</p>
+                        <div className="update-note">
+                            <span>Available now on all platforms</span>
+                        </div>
+                    </div>
+                    <div className="update-gallery">
+                        {voidloop.latestUpdate.screenshots.map((image, index) => (
+                            <button
+                                className={`update-shot update-shot-${index + 1}`}
+                                key={image}
+                                onClick={() => setActiveScreenshot({image, index: allScreenshots.indexOf(image)})}
+                                type="button"
+                            >
+                                <img
+                                    src={image}
+                                    alt={`${voidloop.latestUpdate.label} screenshot ${index + 1}`}
+                                    loading="lazy"
+                                    decoding="async"
+                                />
+                            </button>
+                        ))}
+                    </div>
+                </section>
 
-        <section className="content-panel">
-          <div className="section-heading section-heading-wide">
-            <p className="eyebrow">Credits</p>
-            <h2>The current team behind Voidloop.</h2>
-          </div>
+                <section className="content-panel voidloop-story-panel">
+                    <div className="section-heading section-heading-wide">
+                        <p className="eyebrow">Overview</p>
+                        <h2>{voidloop.tagline}</h2>
+                        <p>
+                            Released on {voidloop.releaseDate}, Voidloop is Indie Game Studio&apos;s
+                            debut game, built around risky descents, camp-based progression, and a
+                            steady push back toward home.
+                        </p>
+                    </div>
 
-          <div className="info-grid">
-            {voidloop.credits.map((credit) => (
-              <article className="info-card" key={credit.role}>
-                <p className="release-tag">{credit.role}</p>
-                <h3>{credit.name}</h3>
-              </article>
-            ))}
-          </div>
-        </section>
-      </main>
+                    <div className="info-grid facts-grid">
+                        {voidloop.facts.map((fact) => (
+                            <article className="info-card" key={fact.label}>
+                                <p className="release-tag">{fact.label}</p>
+                                <h3>{fact.value}</h3>
+                            </article>
+                        ))}
+                    </div>
 
-      {activeScreenshot
-        ? createPortal(
-        <div
-          aria-modal="true"
-          className="lightbox"
-          onClick={() => setActiveScreenshot(null)}
-          role="dialog"
-          >
-          <button
-            aria-label="Previous screenshot"
-            className="lightbox-nav lightbox-nav-prev"
-            onClick={(event) => {
-              event.stopPropagation()
-              showPreviousScreenshot()
-            }}
-            type="button"
-          >
-            ‹
-          </button>
-          <button
-            aria-label="Close screenshot"
-            className="lightbox-close"
-            onClick={() => setActiveScreenshot(null)}
-            type="button"
-          >
-            ×
-          </button>
-          <div
-            className="lightbox-panel"
-            onClick={(event) => event.stopPropagation()}
-            role="document"
-          >
-            <img
-              src={activeScreenshot.image}
-              alt={`${voidloop.title} screenshot ${activeScreenshot.index + 1}`}
-            />
-          </div>
-          <button
-            aria-label="Next screenshot"
-            className="lightbox-nav lightbox-nav-next"
-            onClick={(event) => {
-              event.stopPropagation()
-              showNextScreenshot()
-            }}
-            type="button"
-          >
-            ›
-          </button>
-        </div>,
-            document.body,
-          )
-        : null}
-    </>
-  )
+                    <div className="voidloop-flow-divider" aria-hidden="true"/>
+
+                    <div className="section-heading section-heading-wide">
+                        <p className="eyebrow">Features</p>
+                        <h2>Designed around repeat runs, stronger loadouts, and deeper cave pressure.</h2>
+                    </div>
+
+                    <div className="info-grid">
+                        {voidloop.features.map((feature) => (
+                            <article className="info-card" key={feature}>
+                                <p>{feature}</p>
+                            </article>
+                        ))}
+                    </div>
+                </section>
+
+                <section className="content-panel">
+                    <div className="section-heading section-heading-wide">
+                        <p className="eyebrow">Gallery</p>
+                        <h2>Current visuals from camp, caves, and progression systems.</h2>
+                    </div>
+
+                    <div className="release-grid">
+                        {voidloop.featuredScreenshots.map((image, index) => (
+                            <button
+                                className="release-card static-card screenshot-card"
+                                key={image}
+                                onClick={() => setActiveScreenshot({image, index})}
+                                type="button"
+                            >
+                                <img
+                                    src={image}
+                                    alt={`${voidloop.title} screenshot ${index + 1}`}
+                                    loading="lazy"
+                                    decoding="async"
+                                />
+                            </button>
+                        ))}
+                    </div>
+
+                    <div className="mini-gallery-grid">
+                        {voidloop.galleryScreenshots.map((image, index) => (
+                            <button
+                                className="mini-gallery-card"
+                                key={image}
+                                onClick={() =>
+                                    setActiveScreenshot({
+                                        image,
+                                        index: voidloop.featuredScreenshots.length + index,
+                                    })
+                                }
+                                type="button"
+                            >
+                                <img
+                                    src={image}
+                                    alt={`${voidloop.title} gallery screenshot ${index + 4}`}
+                                    loading="lazy"
+                                    decoding="async"
+                                />
+                            </button>
+                        ))}
+                    </div>
+                </section>
+
+                <section className="content-panel">
+                    <div className="section-heading section-heading-wide section-heading-full">
+                        <p className="eyebrow">About This Game</p>
+                        <h2>Built during Jasper Levin&apos;s self-employed placement year and expanded with a small
+                            collaborator team.</h2>
+                        <p>{voidloop.about}</p>
+                    </div>
+                </section>
+
+                <section className="content-panel presskit-section">
+                    <div className="section-heading section-heading-wide">
+                        <p className="eyebrow">Press Kit</p>
+                        <h2>Download materials, & request keys</h2>
+                    </div>
+
+                    <div className="info-grid">
+                        <article className="info-card presskit-card">
+                            <h3>Download Press kit</h3>
+                            <p>
+                                Access the live press kit for logos, screenshots, videos and the trailer.
+                            </p>
+                            <div className="hero-actions">
+                                <a
+                                    className="button button-primary"
+                                    href={voidloop.links.pressKit}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    Open press kit
+                                </a>
+                            </div>
+                        </article>
+                        <article className="info-card presskit-card">
+                            <h3>Steam key requests</h3>
+                            <p>
+                                Request coverage access for Voidloop.
+                            </p>
+                            <div className="hero-actions">
+                                <a
+                                    className="button button-secondary"
+                                    href={voidloop.links.reqKey}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    Request Key
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <section className="content-panel">
+                    <div className="section-heading section-heading-wide">
+                        <p className="eyebrow">Credits</p>
+                        <h2>The current team behind Voidloop.</h2>
+                    </div>
+
+                    <div className="info-grid">
+                        {voidloop.credits.map((credit) => (
+                            <article className="info-card" key={credit.role}>
+                                <p className="release-tag">{credit.role}</p>
+                                <h3>{credit.name}</h3>
+                            </article>
+                        ))}
+                    </div>
+                </section>
+            </main>
+
+            {activeScreenshot
+                ? createPortal(
+                    <div
+                        aria-modal="true"
+                        className="lightbox voidloop-lightbox"
+                        onClick={() => setActiveScreenshot(null)}
+                        role="dialog"
+                    >
+                        <button
+                            aria-label="Previous screenshot"
+                            className="lightbox-nav lightbox-nav-prev"
+                            onClick={(event) => {
+                                event.stopPropagation()
+                                showPreviousScreenshot()
+                            }}
+                            type="button"
+                        >
+                            ‹
+                        </button>
+                        <button
+                            aria-label="Close screenshot"
+                            className="lightbox-close"
+                            onClick={() => setActiveScreenshot(null)}
+                            type="button"
+                        >
+                            ×
+                        </button>
+                        <div
+                            className="lightbox-panel"
+                            onClick={(event) => event.stopPropagation()}
+                            role="document"
+                        >
+                            <img
+                                src={activeScreenshot.image}
+                                alt={`${voidloop.title} screenshot ${activeScreenshot.index + 1}`}
+                            />
+                        </div>
+                        <button
+                            aria-label="Next screenshot"
+                            className="lightbox-nav lightbox-nav-next"
+                            onClick={(event) => {
+                                event.stopPropagation()
+                                showNextScreenshot()
+                            }}
+                            type="button"
+                        >
+                            ›
+                        </button>
+                    </div>,
+                    document.body,
+                )
+                : null}
+        </>
+    )
 }

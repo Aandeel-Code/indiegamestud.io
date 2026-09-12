@@ -44,7 +44,7 @@ export default function ReleaseDetailPage() {
         </div>
 
         <div className="detail-media">
-          <img src={release.image} alt={release.title} />
+          <img src={release.image} alt={release.title} decoding="async" />
           <p className="detail-caption">{release.description}</p>
         </div>
       </section>

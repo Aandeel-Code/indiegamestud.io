@@ -4,6 +4,7 @@ import SiteLayout from './components/SiteLayout'
 import AboutPage from './pages/AboutPage'
 import ContactPage from './pages/ContactPage'
 import HomePage from './pages/HomePage'
+import ANormalQuizGamePage from './pages/ANormalQuizGamePage'
 import VoidloopPage from './pages/VoidloopPage'
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
       <Route element={<SiteLayout />}>
         <Route index element={<HomePage />} />
         <Route path="voidloop" element={<VoidloopPage />} />
+        <Route path="a-normal-quiz-game" element={<ANormalQuizGamePage />} />
         <Route path="about" element={<AboutPage />} />
         <Route path="contact" element={<ContactPage />} />
         <Route path="releases" element={<Navigate replace to="/voidloop" />} />

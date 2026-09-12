@@ -1,4 +1,5 @@
 import heroBackdrop from '../assets/ar57i3.png'
+import voidloopLogo from '../assets/voidloop-logo.png'
 import campBlacksmith from '../assets/VoidloopGallery/Camp-Blacksmith.jpg'
 import campInventory from '../assets/VoidloopGallery/Camp-Inventory.jpg'
 import campMain from '../assets/VoidloopGallery/Camp-Main.jpg'
@@ -21,6 +22,7 @@ export const voidloop = {
   releaseDate: 'April 13, 2026',
   platforms: ['Windows', 'Mac', 'iPhone', 'Android'],
   heroImage: heroBackdrop,
+  logo: voidloopLogo,
   featuredScreenshots: [cutsceneVoid, campMain, campMarket],
   galleryScreenshots: [
     campBlacksmith,
@@ -41,7 +43,7 @@ export const voidloop = {
   summary:
     'You play as a lonely Void Spirit who has wandered too far from home. Use your camp as a hub to prepare for each descent into ever-changing caves filled with rare loot and dangerous foes.',
   description:
-    'Voidloop is a mining adventure with roguelite elements. Mine, fight, and loot your way through cursed caves, return to camp between runs, and build the strength needed to find your way back to the void.',
+    'Mine, fight, and loot your way through cursed caves, return to camp between runs, and build the strength needed to find your way back to the void.',
   features: [
     'Descend through 5 unique cave biomes with procedurally generated floors, hazards, and valuable resources.',
     'Race toward floor 20 of each cave to collect powerful gems and uncover the route back to the void.',

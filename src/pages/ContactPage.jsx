@@ -67,20 +67,15 @@ export default function ContactPage() {
             </a>
           </div>
         </article>
-        <article className="info-card">
-          <h2>Game Discord servers</h2>
-          <div className="hero-actions">
-            <a
-              className="contact-discord-button"
-              href={voidloop.links.discord}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <img src={discordIcon} alt="" />
-              <span>Voidloop Discord</span>
-            </a>
-          </div>
-        </article>
+        <a
+          className="info-card contact-discord-card"
+          href={voidloop.links.discord}
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img src={discordIcon} alt="" />
+          <h2>Indie Game Studio Discord</h2>
+        </a>
       </section>
     </main>
   )

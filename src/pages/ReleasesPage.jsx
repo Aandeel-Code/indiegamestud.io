@@ -20,7 +20,7 @@ export default function ReleasesPage() {
             key={release.slug}
             to={`/releases/${release.slug}`}
           >
-            <img src={release.image} alt={release.title} />
+            <img src={release.image} alt={release.title} loading="lazy" decoding="async" />
             <div className="release-overlay">
               <p className="release-tag">{release.tag}</p>
               <h3>{release.title}</h3>
