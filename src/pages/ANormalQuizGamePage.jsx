@@ -12,10 +12,29 @@ const galleryHoverColors = [
     'var(--quiz-blue)',
 ]
 
+const mobileMediaQuery = '(max-width: 760px)'
+
+const getIsMobile = () =>
+    typeof window !== 'undefined' && window.matchMedia(mobileMediaQuery).matches
+
 export default function ANormalQuizGamePage() {
     const [activeIndex, setActiveIndex] = useState(null)
+    const [isMobile, setIsMobile] = useState(getIsMobile)
     const [hoveredGalleryIndex, setHoveredGalleryIndex] = useState(null)
     const [galleryHoverColorIndex, setGalleryHoverColorIndex] = useState(-1)
+
+    useEffect(() => {
+        const mediaQuery = window.matchMedia(mobileMediaQuery)
+        const handleChange = (event) => setIsMobile(event.matches)
+
+        if (mediaQuery.addEventListener) {
+            mediaQuery.addEventListener('change', handleChange)
+            return () => mediaQuery.removeEventListener('change', handleChange)
+        }
+
+        mediaQuery.addListener(handleChange)
+        return () => mediaQuery.removeListener(handleChange)
+    }, [])
 
     useEffect(() => {
         if (activeIndex === null) {
@@ -48,6 +67,24 @@ export default function ANormalQuizGamePage() {
         }
     }, [activeIndex])
 
+    useEffect(() => {
+        if (activeIndex === null) {
+            return
+        }
+
+        const neighboringIndexes = [
+            (activeIndex - 1 + aNormalQuizGame.gallery.length) % aNormalQuizGame.gallery.length,
+            (activeIndex + 1) % aNormalQuizGame.gallery.length,
+        ]
+
+        neighboringIndexes.forEach((index) => {
+            const screenshot = aNormalQuizGame.gallery[index]
+            const preloadImage = new Image()
+            preloadImage.src = isMobile ? screenshot.mobileImage : screenshot.image
+            preloadImage.decode?.().catch(() => {})
+        })
+    }, [activeIndex, isMobile])
+
     const activeScreenshot =
         activeIndex === null ? null : aNormalQuizGame.gallery[activeIndex]
 
@@ -73,9 +110,13 @@ export default function ANormalQuizGamePage() {
     return (
         <main className="quiz-page">
             <section className="quiz-hero" id="quiz-top" aria-labelledby="quiz-page-title">
-                <img className="quiz-hero-background" src={aNormalQuizGame.background} alt="" decoding="async"
-                     fetchPriority="high"/>
-                <div className="quiz-hero-overlay" aria-hidden="true"/>
+                {!isMobile ? (
+                    <>
+                        <img className="quiz-hero-background" src={aNormalQuizGame.background} alt="" decoding="async"
+                             fetchPriority="high"/>
+                        <div className="quiz-hero-overlay" aria-hidden="true"/>
+                    </>
+                ) : null}
 
                 <div className="quiz-hero-content">
                     <div className="quiz-hero-copy">
@@ -106,39 +147,50 @@ export default function ANormalQuizGamePage() {
                     </div>
 
                     <div className="quiz-hero-logo-stage">
-                        <div className="quiz-hero-dial" aria-hidden="true">
-                            <img src={aNormalQuizGame.background} alt="" decoding="async"/>
+                        {!isMobile ? (
+                            <div className="quiz-hero-dial" aria-hidden="true">
+                                <img src={aNormalQuizGame.background} alt="" decoding="async"/>
+                            </div>
+                        ) : null}
+                        <picture className="quiz-hero-logo-picture">
+                            <source media={mobileMediaQuery} srcSet={aNormalQuizGame.logoTrimmed}/>
+                            <img
+                                className="quiz-hero-logo hero-logo-breathe"
+                                src={aNormalQuizGame.logo}
+                                alt="A Normal Quiz Game"
+                                decoding="async"
+                            />
+                        </picture>
+                    </div>
+
+                    {!isMobile ? (
+                        <div className="quiz-hero-art" aria-hidden="true">
+                            <img className="quiz-hero-orphan" src={aNormalQuizGame.decorativeArt.orphan} alt=""
+                                 decoding="async"/>
+                            <img className="quiz-hero-car" src={aNormalQuizGame.decorativeArt.carOne} alt=""
+                                 decoding="async"/>
+                            <img className="quiz-hero-dice" src={aNormalQuizGame.decorativeArt.dice} alt=""
+                                 decoding="async"/>
                         </div>
-                        <img
-                            className="quiz-hero-logo hero-logo-breathe"
-                            src={aNormalQuizGame.logo}
-                            alt="A Normal Quiz Game"
-                            decoding="async"
-                        />
-                    </div>
-
-                    <div className="quiz-hero-art" aria-hidden="true">
-                        <img className="quiz-hero-orphan" src={aNormalQuizGame.decorativeArt.orphan} alt=""
-                             decoding="async"/>
-                        <img className="quiz-hero-car" src={aNormalQuizGame.decorativeArt.carOne} alt=""
-                             decoding="async"/>
-                        <img className="quiz-hero-dice" src={aNormalQuizGame.decorativeArt.dice} alt=""
-                             decoding="async"/>
-                    </div>
+                    ) : null}
                 </div>
 
-                <div className="quiz-hero-ticker" aria-hidden="true">
-                    <span>A NORMAL QUIZ GAME</span>
-                    <span>•</span>
-                    <span>WINDOWS + MAC</span>
-                    <span>•</span>
-                    <span>Q1 2027</span>
-                    <span>•</span>
-                    <span>WISHLIST NOW</span>
-                </div>
-                <a className="quiz-hero-see-more" href="#quiz-features">
-                    See more <span aria-hidden="true">↓</span>
-                </a>
+                {!isMobile ? (
+                    <>
+                        <div className="quiz-hero-ticker" aria-hidden="true">
+                            <span>A NORMAL QUIZ GAME</span>
+                            <span>•</span>
+                            <span>WINDOWS + MAC</span>
+                            <span>•</span>
+                            <span>Q1 2027</span>
+                            <span>•</span>
+                            <span>WISHLIST NOW</span>
+                        </div>
+                        <a className="quiz-hero-see-more" href="#quiz-features">
+                            See more <span aria-hidden="true">↓</span>
+                        </a>
+                    </>
+                ) : null}
             </section>
 
             <div className="quiz-page-body">
@@ -220,7 +272,7 @@ export default function ANormalQuizGamePage() {
                                 className={`quiz-gallery-card${index === 0 ? ' quiz-gallery-card-featured' : ''}${
                                     hoveredGalleryIndex === index ? ' is-hovered' : ''
                                 }`}
-                                key={screenshot.label}
+                                key={screenshot.image}
                                 onClick={() => setActiveIndex(index)}
                                 onBlur={() => setHoveredGalleryIndex(null)}
                                 onFocus={() => handleGalleryFocus(index)}
@@ -234,12 +286,17 @@ export default function ANormalQuizGamePage() {
                                 type="button"
                             >
                                 <div className="quiz-gallery-card-media">
-                                    <img
-                                        src={screenshot.image}
-                                        alt={`${screenshot.label} screenshot`}
-                                        loading="lazy"
-                                        decoding="async"
-                                    />
+                                    <picture>
+                                        <source media={mobileMediaQuery} srcSet={screenshot.mobileImage}/>
+                                        <img
+                                            src={screenshot.image}
+                                            alt={`${screenshot.label} screenshot`}
+                                            width="2560"
+                                            height="1440"
+                                            loading="lazy"
+                                            decoding="async"
+                                        />
+                                    </picture>
                                 </div>
                                 <span>
                   <small>{screenshot.group}</small>
@@ -329,7 +386,16 @@ export default function ANormalQuizGamePage() {
                             ←
                         </button>
                         <figure className="quiz-lightbox-figure">
-                            <img src={activeScreenshot.image} alt={`${activeScreenshot.label} screenshot`}/>
+                            <picture>
+                                <source media={mobileMediaQuery} srcSet={activeScreenshot.mobileImage}/>
+                                <img
+                                    src={activeScreenshot.image}
+                                    alt={`${activeScreenshot.label} screenshot`}
+                                    width="2560"
+                                    height="1440"
+                                    decoding="async"
+                                />
+                            </picture>
                             <figcaption>
                                 <span>{activeScreenshot.group}</span>
                                 {activeScreenshot.label} · {activeIndex + 1} / {aNormalQuizGame.gallery.length}

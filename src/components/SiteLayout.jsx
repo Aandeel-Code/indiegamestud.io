@@ -14,9 +14,23 @@ function linkClassName({ isActive }) {
 
 export default function SiteLayout() {
   const [isScrolled, setIsScrolled] = useState(false)
+  const [mobileMenu, setMobileMenu] = useState({ path: '', isOpen: false })
   const headerRef = useRef(null)
+  const menuButtonRef = useRef(null)
   const location = useLocation()
   const isQuizPage = location.pathname.replace(/\/$/, '') === '/a-normal-quiz-game'
+  const isMenuOpen = mobileMenu.path === location.pathname && mobileMenu.isOpen
+
+  const closeMenu = () => {
+    setMobileMenu({ path: location.pathname, isOpen: false })
+  }
+
+  const toggleMenu = () => {
+    setMobileMenu((currentMenu) => ({
+      path: location.pathname,
+      isOpen: currentMenu.path === location.pathname ? !currentMenu.isOpen : true,
+    }))
+  }
 
   useLayoutEffect(() => {
     const header = headerRef.current
@@ -77,29 +91,94 @@ export default function SiteLayout() {
     window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
   }, [location.pathname])
 
+  useEffect(() => {
+    if (!isMenuOpen) {
+      return undefined
+    }
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setMobileMenu((currentMenu) => ({ ...currentMenu, isOpen: false }))
+        menuButtonRef.current?.focus()
+      }
+    }
+
+    const handlePointerDown = (event) => {
+      if (!headerRef.current?.contains(event.target)) {
+        setMobileMenu((currentMenu) => ({ ...currentMenu, isOpen: false }))
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    document.addEventListener('pointerdown', handlePointerDown)
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+      document.removeEventListener('pointerdown', handlePointerDown)
+    }
+  }, [isMenuOpen])
+
+  useEffect(() => {
+    const desktopMediaQuery = window.matchMedia('(min-width: 861px)')
+    const handleBreakpointChange = (event) => {
+      if (event.matches) {
+        setMobileMenu((currentMenu) => ({ ...currentMenu, isOpen: false }))
+      }
+    }
+
+    if (desktopMediaQuery.addEventListener) {
+      desktopMediaQuery.addEventListener('change', handleBreakpointChange)
+      return () => desktopMediaQuery.removeEventListener('change', handleBreakpointChange)
+    }
+
+    desktopMediaQuery.addListener(handleBreakpointChange)
+    return () => desktopMediaQuery.removeListener(handleBreakpointChange)
+  }, [])
+
   return (
     <div
       className={`page-shell${isQuizPage ? ' page-shell-quiz' : ''}`}
     >
-      <header ref={headerRef} className={isScrolled ? 'topbar is-scrolled' : 'topbar'}>
-        <NavLink className="brand" to="/">
+      <header
+        ref={headerRef}
+        className={`topbar${isScrolled ? ' is-scrolled' : ''}${isMenuOpen ? ' is-menu-open' : ''}`}
+      >
+        <NavLink className="brand" to="/" onClick={closeMenu}>
           <img src={logoImage} alt="Indie Game Studio" decoding="async" />
         </NavLink>
 
-        <nav className="topnav" aria-label="Primary">
-          <NavLink className={linkClassName} to="/">
+        <button
+          ref={menuButtonRef}
+          className={`nav-menu-toggle${isMenuOpen ? ' is-open' : ''}`}
+          type="button"
+          aria-expanded={isMenuOpen}
+          aria-controls="primary-navigation"
+          aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+          onClick={toggleMenu}
+        >
+          <span aria-hidden="true" />
+          <span aria-hidden="true" />
+          <span aria-hidden="true" />
+        </button>
+
+        <nav
+          id="primary-navigation"
+          className={`topnav${isMenuOpen ? ' is-open' : ''}`}
+          aria-label="Primary"
+        >
+          <NavLink className={linkClassName} to="/" onClick={closeMenu}>
             Home
           </NavLink>
-          <NavLink className={linkClassName} to="/voidloop">
+          <NavLink className={linkClassName} to="/voidloop" onClick={closeMenu}>
             Voidloop
           </NavLink>
-          <NavLink className={linkClassName} to="/a-normal-quiz-game">
+          <NavLink className={linkClassName} to="/a-normal-quiz-game" onClick={closeMenu}>
             A Normal Quiz Game
           </NavLink>
-          <NavLink className={linkClassName} to="/about">
+          <NavLink className={linkClassName} to="/about" onClick={closeMenu}>
             About
           </NavLink>
-          <NavLink className={linkClassName} to="/contact">
+          <NavLink className={linkClassName} to="/contact" onClick={closeMenu}>
             Contact
           </NavLink>
         </nav>
