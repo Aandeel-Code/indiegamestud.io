@@ -1945,12 +1945,13 @@
 
 @media (max-width: 860px) {
     :root {
-        --header-height: 6.0625rem;
+        --header-height: calc(6.0625rem + env(safe-area-inset-top, 0px));
     }
 
     .topbar {
         align-items: center;
         flex-direction: row;
+        padding-top: calc(0.625rem + env(safe-area-inset-top, 0px));
     }
 
     .nav-menu-toggle {
@@ -2080,7 +2081,7 @@
 
 @media (max-width: 560px) {
     :root {
-        --header-height: 6.0625rem;
+        --header-height: calc(6.0625rem + env(safe-area-inset-top, 0px));
     }
 
     .hero-art {

@@ -17,6 +17,12 @@ if (redirectPath) {
   window.scrollTo(0, 0)
 }
 
+if (import.meta.env.PROD && 'serviceWorker' in navigator) {
+  navigator.serviceWorker
+    .register('/image-cache-sw.js', { updateViaCache: 'none' })
+    .catch(() => {})
+}
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
