@@ -1,7 +1,8 @@
 import {useEffect, useState} from 'react'
 import {createPortal} from 'react-dom'
 import steamIcon from '../assets/icons/steam.svg'
-import featureVideo from '../assets/ANormalQuizGameGallery/Individual/video.mp4'
+import featureVideoMp4 from '../assets/ANormalQuizGameGallery/Individual/video.mp4'
+import featureVideoWebm from '../assets/ANormalQuizGameGallery/Individual/video.webm'
 import {aNormalQuizGame} from '../data/aNormalQuizGame'
 import './ANormalQuizGamePage.css'
 
@@ -17,11 +18,55 @@ const mobileMediaQuery = '(max-width: 760px)'
 const getIsMobile = () =>
     typeof window !== 'undefined' && window.matchMedia(mobileMediaQuery).matches
 
+const selectFeatureVideo = async () => {
+    if (!navigator.mediaCapabilities?.decodingInfo) {
+        return featureVideoWebm
+    }
+
+    try {
+        const capabilities = await navigator.mediaCapabilities.decodingInfo({
+            type: 'file',
+            video: {
+                contentType: 'video/mp4; codecs="hvc1.1.6.L120.90"',
+                width: 1170,
+                height: 658,
+                bitrate: 1324291,
+                framerate: 60,
+                alphaChannel: true,
+            },
+        })
+        const configuration = capabilities.configuration ?? capabilities.supportedConfiguration
+
+        if (capabilities.supported && configuration?.video?.alphaChannel === true) {
+            return featureVideoMp4
+        }
+    } catch {
+        // Browsers without the alphaChannel Media Capabilities extension use WebM.
+    }
+
+    return featureVideoWebm
+}
+
 export default function ANormalQuizGamePage() {
     const [activeIndex, setActiveIndex] = useState(null)
     const [isMobile, setIsMobile] = useState(getIsMobile)
+    const [featureVideoSource, setFeatureVideoSource] = useState(null)
     const [hoveredGalleryIndex, setHoveredGalleryIndex] = useState(null)
     const [galleryHoverColorIndex, setGalleryHoverColorIndex] = useState(-1)
+
+    useEffect(() => {
+        let isCancelled = false
+
+        selectFeatureVideo().then((source) => {
+            if (!isCancelled) {
+                setFeatureVideoSource(source)
+            }
+        })
+
+        return () => {
+            isCancelled = true
+        }
+    }, [])
 
     useEffect(() => {
         const mediaQuery = window.matchMedia(mobileMediaQuery)
@@ -209,7 +254,7 @@ export default function ANormalQuizGamePage() {
                     </div>
                     <video
                         className="quiz-features-video"
-                        src={featureVideo}
+                        src={featureVideoSource ?? undefined}
                         autoPlay
                         loop
                         muted
