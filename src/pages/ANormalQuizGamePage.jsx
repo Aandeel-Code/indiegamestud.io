@@ -225,7 +225,7 @@ export default function ANormalQuizGamePage() {
                         <div className="quiz-hero-ticker" aria-hidden="true">
                             <span>A NORMAL QUIZ GAME</span>
                             <span>•</span>
-                            <span>WINDOWS + MAC</span>
+                            <span>WINDOWS</span>
                             <span>•</span>
                             <span>Q1 2027</span>
                             <span>•</span>
@@ -386,7 +386,7 @@ export default function ANormalQuizGamePage() {
 
                 <section className="quiz-final-cta" aria-label="Steam wishlist call to action">
                     <div className="quiz-final-cta-copy">
-                        <p className="quiz-final-meta">Q1 2027 / Windows + Mac</p>
+                        <p className="quiz-final-meta">{aNormalQuizGame.releaseDate} / {aNormalQuizGame.platforms}</p>
                         <h2>Ready for a normal one?</h2>
                         <a
                             className="quiz-button quiz-button-primary"

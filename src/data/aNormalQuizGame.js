@@ -37,7 +37,7 @@ import verticalCapsule from '../assets/ANormalQuizGameGallery/PromotionalArt/Ver
 export const aNormalQuizGame = {
     title: 'A Normal Quiz Game',
     releaseDate: 'Q1 2027',
-    platforms: 'Windows & Mac',
+    platforms: 'Windows',
     logo,
     logoTrimmed,
     background,

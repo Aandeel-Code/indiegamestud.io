@@ -117,7 +117,7 @@ export default function HomePage() {
             <img src={aNormalQuizGame.background} alt="" decoding="async" fetchPriority="high" />
           </div>
           <div className="home-game-panel-content">
-            <p className="home-game-kicker">Coming Q1 2027 · Windows + Mac</p>
+            <p className="home-game-kicker">Coming {aNormalQuizGame.releaseDate} · {aNormalQuizGame.platforms}</p>
             <h2 className="home-sr-only" id="home-quiz-title">A Normal Quiz Game</h2>
             <img className="home-game-logo home-game-logo-quiz hero-logo-breathe" src={aNormalQuizGame.logoTrimmed} alt="A Normal Quiz Game" decoding="async" />
             <p className="home-game-description">
