@@ -15,6 +15,7 @@ export default defineConfig({
         about: path.resolve(__dirname, 'about/index.html'),
         contact: path.resolve(__dirname, 'contact/index.html'),
         voidloop: path.resolve(__dirname, 'voidloop/index.html'),
+        aNormalQuizGame: path.resolve(__dirname, 'a-normal-quiz-game/index.html'),
       },
     },
   },

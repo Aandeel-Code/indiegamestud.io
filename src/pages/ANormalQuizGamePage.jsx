@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react'
+import {useEffect, useRef, useState} from 'react'
 import {createPortal} from 'react-dom'
 import steamIcon from '../assets/icons/steam.svg'
 import featureVideoMp4 from '../assets/ANormalQuizGameGallery/Individual/video.mp4'
@@ -47,12 +47,42 @@ const selectFeatureVideo = async () => {
     return featureVideoWebm
 }
 
+function DemoButton({children = 'Play the free demo'}) {
+    return (
+        <a
+            className="quiz-button quiz-button-primary"
+            href={aNormalQuizGame.links.demo}
+            target="_blank"
+            rel="noreferrer"
+        >
+            <img src={steamIcon} alt=""/>
+            {children}
+        </a>
+    )
+}
+
+function WishlistButton({children = 'Wishlist on Steam'}) {
+    return (
+        <a
+            className="quiz-button quiz-button-secondary"
+            href={aNormalQuizGame.links.steam}
+            target="_blank"
+            rel="noreferrer"
+        >
+            <img src={steamIcon} alt=""/>
+            {children}
+        </a>
+    )
+}
+
 export default function ANormalQuizGamePage() {
     const [activeIndex, setActiveIndex] = useState(null)
     const [isMobile, setIsMobile] = useState(getIsMobile)
     const [featureVideoSource, setFeatureVideoSource] = useState(null)
     const [hoveredGalleryIndex, setHoveredGalleryIndex] = useState(null)
     const [galleryHoverColorIndex, setGalleryHoverColorIndex] = useState(-1)
+    const lightboxCloseRef = useRef(null)
+    const lightboxReturnFocusRef = useRef(null)
 
     useEffect(() => {
         let isCancelled = false
@@ -112,6 +142,19 @@ export default function ANormalQuizGamePage() {
         }
     }, [activeIndex])
 
+    const isLightboxOpen = activeIndex !== null
+
+    useEffect(() => {
+        if (!isLightboxOpen) {
+            return undefined
+        }
+
+        const returnFocusTarget = lightboxReturnFocusRef.current
+        lightboxCloseRef.current?.focus()
+
+        return () => returnFocusTarget?.focus()
+    }, [isLightboxOpen])
+
     useEffect(() => {
         if (activeIndex === null) {
             return
@@ -152,6 +195,11 @@ export default function ANormalQuizGamePage() {
         setHoveredGalleryIndex(index)
     }
 
+    const openLightbox = (event, index) => {
+        lightboxReturnFocusRef.current = event.currentTarget
+        setActiveIndex(index)
+    }
+
     return (
         <main className="quiz-page">
             <section className="quiz-hero" id="quiz-top" aria-labelledby="quiz-page-title">
@@ -165,7 +213,7 @@ export default function ANormalQuizGamePage() {
 
                 <div className="quiz-hero-content">
                     <div className="quiz-hero-copy">
-                        <p className="quiz-overline">coming soon</p>
+                        <p className="quiz-overline">{aNormalQuizGame.demo.label} out now</p>
                         <h1 className="quiz-sr-only" id="quiz-page-title">
                             A Normal Quiz Game
                         </h1>
@@ -175,19 +223,8 @@ export default function ANormalQuizGamePage() {
                         </p>
 
                         <div className="quiz-hero-actions">
-                            <a
-                                className="quiz-button quiz-button-primary"
-                                href={aNormalQuizGame.links.steam}
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                <img src={steamIcon} alt=""/>
-                                Wishlist on Steam
-                            </a>
-                            <a className="quiz-button quiz-button-secondary" href="#quiz-gallery">
-                                View the gallery
-                                <span aria-hidden="true">↓</span>
-                            </a>
+                            <DemoButton/>
+                            <WishlistButton/>
                         </div>
                     </div>
 
@@ -225,9 +262,11 @@ export default function ANormalQuizGamePage() {
                         <div className="quiz-hero-ticker" aria-hidden="true">
                             <span>A NORMAL QUIZ GAME</span>
                             <span>•</span>
-                            <span>WINDOWS</span>
+                            <span>FREE DEMO OUT NOW</span>
                             <span>•</span>
-                            <span>Q1 2027</span>
+                            <span>{aNormalQuizGame.platforms.toUpperCase()}</span>
+                            <span>•</span>
+                            <span>{aNormalQuizGame.releaseDate.toUpperCase()}</span>
                             <span>•</span>
                             <span>WISHLIST NOW</span>
                         </div>
@@ -264,6 +303,37 @@ export default function ANormalQuizGamePage() {
                     />
                 </section>
 
+                <section className="quiz-section quiz-demo" id="quiz-demo" aria-labelledby="quiz-demo-title">
+                    <div className="quiz-demo-card">
+                        <img
+                            className="quiz-demo-prop"
+                            src={aNormalQuizGame.decorativeArt.dice}
+                            alt=""
+                            aria-hidden="true"
+                            loading="lazy"
+                            decoding="async"
+                        />
+                        <div className="quiz-demo-copy">
+                            <p className="quiz-demo-badge">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M12 3a1 1 0 0 1 1 1v9.59l3.3-3.3a1 1 0 1 1 1.4 1.42l-5 5a1 1 0 0 1-1.4 0l-5-5a1 1 0 1 1 1.4-1.42l3.3 3.3V4a1 1 0 0 1 1-1ZM5 19a1 1 0 0 1 1-1h12a1 1 0 1 1 0 2H6a1 1 0 0 1-1-1Z"/>
+                                </svg>
+                                {aNormalQuizGame.demo.label} · {aNormalQuizGame.demo.status}
+                            </p>
+                            <h2 id="quiz-demo-title">The demo is out. Go get it wrong.</h2>
+                            <p>
+                                Try the questions, the tricks, and the punishments for yourself before
+                                the full game arrives in {aNormalQuizGame.releaseDate}. If you enjoy
+                                losing, add it to your wishlist on the way out.
+                            </p>
+                        </div>
+                        <div className="quiz-demo-actions">
+                            <DemoButton>Download the free demo</DemoButton>
+                            <WishlistButton/>
+                        </div>
+                    </div>
+                </section>
+
                 <section className="quiz-facts" id="quiz-details" aria-label="Release details">
                     <img
                         className="quiz-section-prop quiz-facts-monster-prop"
@@ -274,7 +344,7 @@ export default function ANormalQuizGamePage() {
                         decoding="async"
                     />
                     <img
-                        className="quiz-section-prop quiz-facts-orphan-prop"
+                        className="quiz-section-prop quiz-facts-button-prop"
                         src={aNormalQuizGame.decorativeArt.button}
                         alt=""
                         aria-hidden="true"
@@ -293,6 +363,14 @@ export default function ANormalQuizGamePage() {
                             <div>
                                 <dt>Platforms</dt>
                                 <dd>{aNormalQuizGame.platforms}</dd>
+                            </div>
+                            <div>
+                                <dt>{aNormalQuizGame.demo.label}</dt>
+                                <dd>
+                                    <a href={aNormalQuizGame.links.demo} target="_blank" rel="noreferrer">
+                                        Out now
+                                    </a>
+                                </dd>
                             </div>
                         </dl>
                     </div>
@@ -318,7 +396,7 @@ export default function ANormalQuizGamePage() {
                                     hoveredGalleryIndex === index ? ' is-hovered' : ''
                                 }`}
                                 key={screenshot.image}
-                                onClick={() => setActiveIndex(index)}
+                                onClick={(event) => openLightbox(event, index)}
                                 onBlur={() => setHoveredGalleryIndex(null)}
                                 onFocus={() => handleGalleryFocus(index)}
                                 onMouseEnter={() => handleGalleryMouseEnter(index)}
@@ -344,9 +422,9 @@ export default function ANormalQuizGamePage() {
                                     </picture>
                                 </div>
                                 <span>
-                  <small>{screenshot.group}</small>
+                                    <small>{screenshot.group}</small>
                                     {screenshot.label}
-                </span>
+                                </span>
                             </button>
                         ))}
                     </div>
@@ -384,19 +462,16 @@ export default function ANormalQuizGamePage() {
                     </div>
                 </section>
 
-                <section className="quiz-final-cta" aria-label="Steam wishlist call to action">
+                <section className="quiz-final-cta" aria-label="Play the demo and wishlist on Steam">
                     <div className="quiz-final-cta-copy">
-                        <p className="quiz-final-meta">{aNormalQuizGame.releaseDate} / {aNormalQuizGame.platforms}</p>
+                        <p className="quiz-final-meta">
+                            {aNormalQuizGame.demo.label} out now / {aNormalQuizGame.releaseDate} / {aNormalQuizGame.platforms}
+                        </p>
                         <h2>Ready for a normal one?</h2>
-                        <a
-                            className="quiz-button quiz-button-primary"
-                            href={aNormalQuizGame.links.steam}
-                            target="_blank"
-                            rel="noreferrer"
-                        >
-                            <img src={steamIcon} alt=""/>
-                            Add to your Steam wishlist
-                        </a>
+                        <div className="quiz-final-cta-actions">
+                            <DemoButton/>
+                            <WishlistButton>Add to your Steam wishlist</WishlistButton>
+                        </div>
                     </div>
                 </section>
             </div>
@@ -415,6 +490,7 @@ export default function ANormalQuizGamePage() {
                         }}
                     >
                         <button
+                            ref={lightboxCloseRef}
                             className="quiz-lightbox-close"
                             type="button"
                             onClick={() => setActiveIndex(null)}

@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import {createPortal} from 'react-dom'
 import SteamReviewBadge from '../components/SteamReviewBadge'
 import {voidloop} from '../data/voidloop'
@@ -17,6 +17,12 @@ function AndroidIcon() {
         <img className="platform-link-icon platform-link-icon-android" src={androidIcon} alt=""/>
     )
 }
+
+const allScreenshots = [
+    ...voidloop.featuredScreenshots,
+    ...voidloop.galleryScreenshots,
+    ...voidloop.latestUpdate.screenshots,
+]
 
 function MobileStoreLinks({className = ''}) {
     return (
@@ -44,32 +50,59 @@ function MobileStoreLinks({className = ''}) {
 }
 
 export default function VoidloopPage() {
-    const allScreenshots = [
-        ...voidloop.featuredScreenshots,
-        ...voidloop.galleryScreenshots,
-        ...voidloop.latestUpdate.screenshots,
-    ]
     const [activeScreenshot, setActiveScreenshot] = useState(null)
+    const isLightboxOpen = activeScreenshot !== null
 
     const showPreviousScreenshot = () => {
-        if (!activeScreenshot) {
-            return
-        }
+        setActiveScreenshot((current) => {
+            if (!current) {
+                return current
+            }
 
-        const nextIndex =
-            (activeScreenshot.index - 1 + allScreenshots.length) % allScreenshots.length
-
-        setActiveScreenshot({image: allScreenshots[nextIndex], index: nextIndex})
+            const nextIndex = (current.index - 1 + allScreenshots.length) % allScreenshots.length
+            return {image: allScreenshots[nextIndex], index: nextIndex}
+        })
     }
 
     const showNextScreenshot = () => {
-        if (!activeScreenshot) {
-            return
+        setActiveScreenshot((current) => {
+            if (!current) {
+                return current
+            }
+
+            const nextIndex = (current.index + 1) % allScreenshots.length
+            return {image: allScreenshots[nextIndex], index: nextIndex}
+        })
+    }
+
+    useEffect(() => {
+        if (!isLightboxOpen) {
+            return undefined
         }
 
-        const nextIndex = (activeScreenshot.index + 1) % allScreenshots.length
-        setActiveScreenshot({image: allScreenshots[nextIndex], index: nextIndex})
-    }
+        const handleKeyDown = (event) => {
+            if (event.key === 'Escape') {
+                setActiveScreenshot(null)
+            }
+
+            if (event.key === 'ArrowRight') {
+                showNextScreenshot()
+            }
+
+            if (event.key === 'ArrowLeft') {
+                showPreviousScreenshot()
+            }
+        }
+
+        const previousOverflow = document.body.style.overflow
+        document.body.style.overflow = 'hidden'
+        window.addEventListener('keydown', handleKeyDown)
+
+        return () => {
+            document.body.style.overflow = previousOverflow
+            window.removeEventListener('keydown', handleKeyDown)
+        }
+    }, [isLightboxOpen])
 
     return (
         <>
@@ -260,7 +293,7 @@ export default function VoidloopPage() {
                             >
                                 <img
                                     src={image}
-                                    alt={`${voidloop.title} gallery screenshot ${index + 4}`}
+                                    alt={`${voidloop.title} screenshot ${voidloop.featuredScreenshots.length + index + 1}`}
                                     loading="lazy"
                                     decoding="async"
                                 />
@@ -272,7 +305,7 @@ export default function VoidloopPage() {
                 <section className="content-panel">
                     <div className="section-heading section-heading-wide section-heading-full">
                         <p className="eyebrow">About This Game</p>
-                        <h2>Built during Jasper Levin&apos;s self-employed placement year and expanded with a small
+                        <h2>Built during Jasper&apos;s self-employed placement year and expanded with a small
                             collaborator team.</h2>
                         <p>{voidloop.about}</p>
                     </div>
@@ -310,8 +343,6 @@ export default function VoidloopPage() {
                                 <a
                                     className="button button-secondary"
                                     href={voidloop.links.reqKey}
-                                    target="_blank"
-                                    rel="noreferrer"
                                 >
                                     Request Key
                                 </a>

@@ -1,8 +1,7 @@
-import quizGameImage from './assets/ANormalQuizGameGallery/PromotionalArt/Final_1080p__Compressed_.png'
-
 const siteUrl = 'https://indiegamestud.io'
-const defaultImage = `${siteUrl}/og-image.png`
+const defaultImage = `${siteUrl}/Logo_Basic_Largey.png`
 const voidloopImage = `${siteUrl}/voidloop-og.png`
+const quizGameImage = `${siteUrl}/a-normal-quiz-game-og.jpg`
 
 export const seoByPath = {
   '/': {
@@ -22,7 +21,7 @@ export const seoByPath = {
   '/a-normal-quiz-game': {
     title: 'A Normal Quiz Game | Indie Game Studio',
     description:
-      'A Normal Quiz Game is a colourful quiz show full of tricky questions, unexpected gimmicks, and chaotic consequences. Coming Q1 2027 for Windows and Mac.',
+      'A Normal Quiz Game is a colourful quiz show full of tricky questions, unexpected gimmicks, and chaotic consequences. Play the free demo on Steam now. Coming Q1 2027 for Windows.',
     image: quizGameImage,
     url: `${siteUrl}/a-normal-quiz-game/`,
   },

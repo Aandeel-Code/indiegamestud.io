@@ -126,10 +126,6 @@ button:focus-visible {
   transition: opacity 220ms ease;
 }
 
-body.green-overlay-active #root::after {
-  opacity: 1;
-}
-
 h1,
 h2,
 h3 {

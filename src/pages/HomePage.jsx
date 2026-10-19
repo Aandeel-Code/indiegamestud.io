@@ -27,11 +27,11 @@ export default function HomePage() {
       }
     }
 
-    document.addEventListener('mousedown', handlePointerDown)
+    document.addEventListener('pointerdown', handlePointerDown)
     document.addEventListener('keydown', handleKeyDown)
 
     return () => {
-      document.removeEventListener('mousedown', handlePointerDown)
+      document.removeEventListener('pointerdown', handlePointerDown)
       document.removeEventListener('keydown', handleKeyDown)
     }
   }, [playMenuOpen])
@@ -117,7 +117,15 @@ export default function HomePage() {
             <img src={aNormalQuizGame.background} alt="" decoding="async" fetchPriority="high" />
           </div>
           <div className="home-game-panel-content">
-            <p className="home-game-kicker">Coming {aNormalQuizGame.releaseDate} · {aNormalQuizGame.platforms}</p>
+            <p className="home-game-kicker">
+              <span className="home-game-kicker-badge">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 3a1 1 0 0 1 1 1v9.59l3.3-3.3a1 1 0 1 1 1.4 1.42l-5 5a1 1 0 0 1-1.4 0l-5-5a1 1 0 1 1 1.4-1.42l3.3 3.3V4a1 1 0 0 1 1-1ZM5 19a1 1 0 0 1 1-1h12a1 1 0 1 1 0 2H6a1 1 0 0 1-1-1Z"/>
+                </svg>
+                {aNormalQuizGame.demo.label} out now
+              </span>
+              Coming {aNormalQuizGame.releaseDate} · {aNormalQuizGame.platforms}
+            </p>
             <h2 className="home-sr-only" id="home-quiz-title">A Normal Quiz Game</h2>
             <img className="home-game-logo home-game-logo-quiz hero-logo-breathe" src={aNormalQuizGame.logoTrimmed} alt="A Normal Quiz Game" decoding="async" />
             <p className="home-game-description">
@@ -128,15 +136,15 @@ export default function HomePage() {
             <div className="home-game-actions">
               <a
                 className="home-game-button home-game-button-primary"
-                href={aNormalQuizGame.links.steam}
+                href={aNormalQuizGame.links.demo}
                 target="_blank"
                 rel="noreferrer"
               >
                 <span className="home-game-steam-icon" aria-hidden="true" />
-                Wishlist on Steam
+                Play the free demo
               </a>
               <Link className="home-game-button home-game-button-secondary" to="/a-normal-quiz-game">
-                Discover the game
+                Explore the game
                 <span aria-hidden="true">→</span>
               </Link>
             </div>
