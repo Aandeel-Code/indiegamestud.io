@@ -785,27 +785,11 @@
 .quiz-gallery-card > span {
     display: flex;
     flex-direction: column;
-    gap: 0.15rem;
-    min-height: 4.1rem;
-    padding: 0.75rem 0.9rem 0.85rem;
+    padding: 0.85rem 0.9rem;
     background: var(--quiz-paper);
     color: var(--quiz-ink);
     font-size: 0.95rem;
     font-weight: 800;
-}
-
-.quiz-gallery-card small {
-    color: var(--quiz-red);
-    font-size: 0.62rem;
-    font-weight: 800;
-    letter-spacing: 0.13em;
-    text-transform: uppercase;
-}
-
-.quiz-gallery-card:hover > span small,
-.quiz-gallery-card:focus-visible > span small,
-.quiz-gallery-card.is-hovered > span small {
-    color: var(--gallery-hover-color, var(--quiz-red));
 }
 
 .quiz-support {

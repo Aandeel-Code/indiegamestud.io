@@ -421,10 +421,7 @@ export default function ANormalQuizGamePage() {
                                         />
                                     </picture>
                                 </div>
-                                <span>
-                                    <small>{screenshot.group}</small>
-                                    {screenshot.label}
-                                </span>
+                                <span>{screenshot.label}</span>
                             </button>
                         ))}
                     </div>
@@ -518,8 +515,8 @@ export default function ANormalQuizGamePage() {
                                 />
                             </picture>
                             <figcaption>
-                                <span>{activeScreenshot.group}</span>
-                                {activeScreenshot.label} · {activeIndex + 1} / {aNormalQuizGame.gallery.length}
+                                <span>{activeScreenshot.label}</span>
+                                {activeIndex + 1} / {aNormalQuizGame.gallery.length}
                             </figcaption>
                         </figure>
                         <button
